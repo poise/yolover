@@ -92,3 +92,13 @@ task 'html' => %w{extract sprites} do
   rendered = tpl.result(slides: slides)
   IO.write(File.join(ROOT, 'index.html'), rendered)
 end
+
+task 'push' => %w{html images} do
+  sh('git checkout master')
+  sh('git commit -a "Content update."')
+  sh('git checkout gh-pages')
+  sh('git merge --ff master')
+  sh('git checkout master')
+  sh('git push origin master')
+  sh('git push origin gh-pages')
+end
