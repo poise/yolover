@@ -26,7 +26,7 @@ require 'oily_png'
 INPUT_FILE = '/Users/coderanger/Library/Mobile Documents/com~apple~Keynote/Documents/yolover.key'
 ROOT = File.expand_path('..', __FILE__)
 
-task 'default' => %{html images}
+task 'default' => %w{html images}
 
 task 'extract' do
   FileUtils.mkdir_p(File.join(ROOT, 'build'))
