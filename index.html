@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Using Policyfiles: YoloVer as a Workflow</title>
+    <meta name="description" content="A guide to using a Policyfile workflow with Chef">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+/* CSS Reset */
+img,legend{border:0}legend,td,th{padding:0}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,
+canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,optgroup,
+strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}svg:not(:root)
+{overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre,textarea{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button
+{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner
+{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]
+{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+table{border-collapse:collapse;border-spacing:0}
+
+.wrapper {
+  width: 1024px;
+  margin: auto;
+}
+
+.slide td {
+  vertical-align: top;
+  padding: 24px;
+}
+
+.thumbnail {
+  display: inline-block;
+  width: 512px;
+  height: 384px;
+  background-color: #333;
+}
+
+.notes {
+  font-size: 20px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Using Policyfiles: YoloVer as a Workflow</h1>
+      <div class="preamble">
+        <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
+        <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
+        <p>This version compiled on 2016-02-03 23:35:27 -0800</p>
+      </div>
+      <hr />
+      <table>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -0px" href="img/1.png" name="1"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -384px" href="img/2.png" name="2"></a>
+          </td>
+          <td class="notes">
+            10km view of a workflow
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -768px" href="img/3.png" name="3"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1152px" href="img/4.png" name="4"></a>
+          </td>
+          <td class="notes">
+            Policy name corresponds to cluster name, policy group to stage. This is like role and chef environment in the beforetime. A node can be attached to exactly one policy (name) and one policy group.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1536px" href="img/5.png" name="5"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1920px" href="img/6.png" name="6"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -2304px" href="img/7.png" name="7"></a>
+          </td>
+          <td class="notes">
+            Overview of what goes in a Policyfile. Folder layout for multiple policies. Git integration.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -2688px" href="img/8.png" name="8"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -3072px" href="img/9.png" name="9"></a>
+          </td>
+          <td class="notes">
+            You can either give multiple arguments or an array.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -3456px" href="img/10.png" name="10"></a>
+          </td>
+          <td class="notes">
+            Introduce named run lists, like override run lists of yore. We can't use override run lists themselves because we need to use only the cookbooks the policy knows about.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -0px" href="img/11.png" name="11"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -384px" href="img/12.png" name="12"></a>
+          </td>
+          <td class="notes">
+            Rather than have to state specifically where each cookbook comes from, we can provider one or more default sources. The most common is to use https://supermarket.chef.io/, but we can also pull in from a private Supermarket, an organization on a Chef Server, or folder of cookbooks.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -768px" href="img/13.png" name="13"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1152px" href="img/14.png" name="14"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1536px" href="img/15.png" name="15"></a>
+          </td>
+          <td class="notes">
+            Talk about the downsides of the flow. Single pipeline, machine ownership, etc.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1920px" href="img/16.png" name="16"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -2304px" href="img/17.png" name="17"></a>
+          </td>
+          <td class="notes">
+            So by way of an example, let's look at a case with two people trying to push an update to a cluster with three stages.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -2688px" href="img/18.png" name="18"></a>
+          </td>
+          <td class="notes">
+            First the green user compiles their policy, and pushes the compiled policy to stage one.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -3072px" href="img/19.png" name="19"></a>
+          </td>
+          <td class="notes">
+            They do whatever verifications are needed (not pictured), and then proceed to push the compiled policy to stage two. Then let's say they get bored and go out to lunch.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -3456px" href="img/20.png" name="20"></a>
+          </td>
+          <td class="notes">
+            The orange user gets back from lunch early, compiles their own modified policy, and rolls it out to all three stages (again, there would be some verification/burn in between stages but that isn't the point).
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -0px" href="img/21.png" name="21"></a>
+          </td>
+          <td class="notes">
+            Then the green user gets back and finishes their deploy. In the end we have an inconsistent cluster. Stages one and two are running the orange policy but stage three has the green policy.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -384px" href="img/22.png" name="22"></a>
+          </td>
+          <td class="notes">
+            So in short, be aware of when a deploy is happening. If you are deploying on a cluster that you own, this is somewhat easier. If deploying on client clusters, double check with their team(s).
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -768px" href="img/23.png" name="23"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1152px" href="img/24.png" name="24"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1536px" href="img/25.png" name="25"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1920px" href="img/26.png" name="26"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -2304px" href="img/27.png" name="27"></a>
+          </td>
+          <td class="notes">
+            You can't use roles in the run lists of a Policyfile. The biggest case this impacts is having a "base" role applied to all nodes. You can support most of this use case using a shared base Policyfile that is included in all the others. This allows following same snapshot-based workflow while still having some shared data.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -2688px" href="img/28.png" name="28"></a>
+          </td>
+          <td class="notes">
+            A downside compared to a Berkshelf-based workflow is that single cookbooks can't be upgraded without fully re-compiling the policy. Support is planned for the future, but for now take care to diff your compiled policy before pushing to ensure you aren't releasing something unexpected.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3072px" href="img/29.png" name="29"></a>
+          </td>
+          <td class="notes">
+            ChefDK in general and the Policyfile tools in specific are evolving rapidly. Not everything out there has support for the new workflows but it will probably be added soon. If you run into an unsupported corner of the ecosystem, you can always ask me.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3456px" href="img/30.png" name="30"></a>
+          </td>
+          <td class="notes">
+            So to summarize, some of the major things to look out for are pipeline stomping, data management, and possibly wonky integrations.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -0px" href="img/31.png" name="31"></a>
+          </td>
+          <td class="notes">
+            Release process or lack thereof. Benefits and downsides of a semver process. Talk about yolover snapshots.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -384px" href="img/32.png" name="32"></a>
+          </td>
+          <td class="notes">
+            A quick version of a traditional Chef cookbook release process. First we updated the cookbook version in metadata.rb, and make sure to follow SemVer. Then we make a git tag, maybe use Stove to push to a Supermarket site, and `berks upload` to push it to a Chef Server. Then we edit the Chef environment for each stage to roll the new version out, making sure chef-client completes successfully on each stage. Importantly this process is cookbook-centric, so we release each cookbook independently.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -768px" href="img/33.png" name="33"></a>
+          </td>
+          <td class="notes">
+            Usually a release process like this is coupled with SemVer so that we can use that semantic information to structure how new releases flow out to different environments and users. It allows using the pessimistic range operator in environments and dependencies, leaving the version solver in Chef Server and Berkshelf to work out the details.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1152px" href="img/34.png" name="34"></a>
+          </td>
+          <td class="notes">
+            But it isn't all positive. Tracking which changes are compatible with which other changes presents some cognitive load during development. Additionally when running a release process you often need to release multiple cookbooks in the right order. On top of that, Chef's version solver is very limited and only supports three component x.y.z version numbers, no extra tags like -pre or -rc1. This makes it difficult to handle releases when different environments are targeting different git branches of the same cookbook.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1536px" href="img/35.png" name="35"></a>
+          </td>
+          <td class="notes">
+            That's a lot of work.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1920px" href="img/36.png" name="36"></a>
+          </td>
+          <td class="notes">
+            So we want a lighter weight solution. Enter YoloVer: a workflow based around snapshots of a whole run list instead of multiple discrete projects with their own release processes. As you might imagine, this workflow is based around Policyfiles. Using all the tools we just learned, we can manage cookbook deployments with a granularity of whole-repository snapshots. This means we don't need the overhead of a per-cookbook release system but still retain control over rollouts.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -2304px" href="img/37.png" name="37"></a>
+          </td>
+          <td class="notes">
+            So let's look at an example git repository for a hypothetical monitoring team. We have a folder of local cookbooks specific to the team, and a folder of policies for each type of server we are going to maintain.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -2688px" href="img/38.png" name="38"></a>
+          </td>
+          <td class="notes">
+            For the "db" policy we have all the things we saw before. We set the name, as always. Then we set two default sources. Remember these have to be non-overlapping, but it means everything in the cookbooks/ folder will be picked up automatically when needed. We also set one cookbook as coming from a specific git repository. When we take the snapshot, we'll capture whatever is in the master branch of that repository and use it until we recompile. Finally we set our run list, using cookbooks from all three sources.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -3072px" href="img/39.png" name="39"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -3456px" href="img/40.png" name="40"></a>
+          </td>
+          <td class="notes">
+            Having a production workflow is all well and good, but development starts on a workstation somewhere and generally we want to try things locally first.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -0px" href="img/41.png" name="41"></a>
+          </td>
+          <td class="notes">
+            Discuss the chef push command and how to use it.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -384px" href="img/42.png" name="42"></a>
+          </td>
+          <td class="notes">
+            Jenkins, CI, maybe ChefSpec and InSpec?
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -768px" href="img/43.png" name="43"></a>
+          </td>
+          <td class="notes">
+            There are four major branches of testing (unit, integration, acceptance, and smoke) but only unit and integration tests generally happen in the context of local testing. With Chef that means ChefSpec and Test Kitchen. We'll see more of InSpec later when we start writing integration tests, but for now just know it is related to Test Kitchen.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1152px" href="img/44.png" name="44"></a>
+          </td>
+          <td class="notes">
+            Before we go over the details of how to use those tools, let's look at the theory behind the types of testing. Unit tests mean testing a single unit of code. With things like web applications a unit is usually a single class or method, but for Chef our units are more often a single recipe or a custom resource. The goal of unit testing is get high-speed tests above almost anything else. This means we focus on mocking out anything outside of the unit especially anything slow or with side effects.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1536px" href="img/45.png" name="45"></a>
+          </td>
+          <td class="notes">
+            This makes unit tests a great choice for testing edge cases, complex inputs, and regression checks. Because unit tests are generally much faster than integration tests, we can have far more of them without our tests taking a frustrating amount of time.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1920px" href="img/46.png" name="46"></a>
+          </td>
+          <td class="notes">
+            Integration tests are the other side of the coin. We throw all the units in a big pile and light it on fire to see what happens. This means tests take a lot longer since we let them do the whole side-effects thing, and rely on higher-level isolation for repeatability.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -2304px" href="img/47.png" name="47"></a>
+          </td>
+          <td class="notes">
+            So this means generally we use integration tests to look at bigger slices of real-world use cases. Sometimes they can also be used for performance analysis, but beware of how much the test environment impacts the numbers, you probably can't compare directly to production.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -2688px" href="img/48.png" name="48"></a>
+          </td>
+          <td class="notes">
+            ChefSpec is the primary unit testing tool for Chef. It is a set of RSpec helpers and extensions for running a Chef converge without actually modifying the system. By default all providers are stubbed to be a no-op, but you can re-enable specific ones for testing.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3072px" href="img/49.png" name="49"></a>
+          </td>
+          <td class="notes">
+            Test Kitchen is a suite of tools to create a blank VM using any of a number of drivers (Vagrant, AWS, OpenStack, Docker), install Chef and copy our cookbook(s) to the VM, run a normal Chef converge, and then run some tests to confirm the cookbook did what we think it was supposed to.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3456px" href="img/50.png" name="50"></a>
+          </td>
+          <td class="notes">
+            Before we dive into the specifics of ChefSpec, let's talk about writing RSpec tests in general. ChefSpec builds on top of RSpec so you need to walk before you can run (or converge, ::cymbal crash::).
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -0px" href="img/51.png" name="51"></a>
+          </td>
+          <td class="notes">
+            The simplest possible RSpec test. We have one example group, created using "describe" and labeled "a thing". Inside that is one example ("it") labeled "is a thing". Group and example labels can be anything, and we'll cover them in more detail in a moment, but overall the standard is to make the RSpec code read like prose. Inside the example we have one expectation ("expect()"), in this case just comparing 1==1.
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -384px" href="img/52.png" name="52"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -768px" href="img/53.png" name="53"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1152px" href="img/54.png" name="54"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1536px" href="img/55.png" name="55"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1920px" href="img/56.png" name="56"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2304px" href="img/57.png" name="57"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2688px" href="img/58.png" name="58"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3072px" href="img/59.png" name="59"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3456px" href="img/60.png" name="60"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -0px" href="img/61.png" name="61"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -384px" href="img/62.png" name="62"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -768px" href="img/63.png" name="63"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1152px" href="img/64.png" name="64"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1536px" href="img/65.png" name="65"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1920px" href="img/66.png" name="66"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2304px" href="img/67.png" name="67"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2688px" href="img/68.png" name="68"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -3072px" href="img/69.png" name="69"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -3456px" href="img/70.png" name="70"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -0px" href="img/71.png" name="71"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -384px" href="img/72.png" name="72"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -768px" href="img/73.png" name="73"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -1152px" href="img/74.png" name="74"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -1536px" href="img/75.png" name="75"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -1920px" href="img/76.png" name="76"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -2304px" href="img/77.png" name="77"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -2688px" href="img/78.png" name="78"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -3072px" href="img/79.png" name="79"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -3456px" href="img/80.png" name="80"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -0px" href="img/81.png" name="81"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -384px" href="img/82.png" name="82"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -768px" href="img/83.png" name="83"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -1152px" href="img/84.png" name="84"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -1536px" href="img/85.png" name="85"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -1920px" href="img/86.png" name="86"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -2304px" href="img/87.png" name="87"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -2688px" href="img/88.png" name="88"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -3072px" href="img/89.png" name="89"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-8.png);background-position: 0 -3456px" href="img/90.png" name="90"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-9.png);background-position: 0 -0px" href="img/91.png" name="91"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-9.png);background-position: 0 -384px" href="img/92.png" name="92"></a>
+          </td>
+          <td class="notes">
+            How this workflow operates with a team.
+          </td>
+        </div>
+        </tr>
+      </table>
+    </div>
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-45534915-4','auto');ga('send','pageview');
+    </script>
+  </body>
+</html>
