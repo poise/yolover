@@ -26,11 +26,14 @@ require 'oily_png'
 INPUT_FILE = '/Users/coderanger/Library/Mobile Documents/com~apple~Keynote/Documents/yolover.key'
 ROOT = File.expand_path('..', __FILE__)
 
+task 'default' => %{html images}
+
 task 'extract' do
   FileUtils.mkdir_p(File.join(ROOT, 'build'))
+  puts 'Running extraction script'
   cmd = Mixlib::ShellOut.new(['osascript', File.join(ROOT, 'extract.applescript'), INPUT_FILE, ROOT])
-  #cmd.run_command
-  #cmd.error!
+  cmd.run_command
+  cmd.error!
 end
 
 task 'images' => %w{extract} do
@@ -74,7 +77,7 @@ task 'sprites' => %w{extract} do
   IO.write(File.join(ROOT, 'build', 'sprites.json'), sprite_data.to_json)
 end
 
-task 'html' => %w{extract} do #thumbnails
+task 'html' => %w{extract sprites} do
   # Load source data.
   tpl = Erubis::Eruby.new(IO.read(File.join(ROOT, 'template.erb')))
   slides = JSON.parse(IO.read(File.join(ROOT, 'build', 'extract.json')))
