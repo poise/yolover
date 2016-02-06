@@ -95,7 +95,8 @@ end
 
 task 'push' => %w{html images} do
   sh('git checkout master')
-  sh('git commit -a "Content update."')
+  sh('git add *.pdf images/*.png index.html')
+  sh('git commit -m "Content update."')
   sh('git checkout gh-pages')
   sh('git merge --ff master')
   sh('git checkout master')
