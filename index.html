@@ -46,7 +46,7 @@ table{border-collapse:collapse;border-spacing:0}
       <div class="preamble">
         <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
         <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
-        <p>This version compiled on 2016-02-05 18:24:12 -0800</p>
+        <p>This version compiled on 2016-02-08 21:23:41 -0800</p>
       </div>
       <hr />
       <table>
@@ -496,7 +496,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3456px" href="img/50.png" name="50"></a>
           </td>
           <td class="notes">
-            
+            A pretty simple role for deploying some kind of application. We're pulling in some kind of base recipe, an application recipe, and set a node attribute for the application's port.
           </td>
         </div>
         </tr>
@@ -505,7 +505,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -0px" href="img/51.png" name="51"></a>
           </td>
           <td class="notes">
-            
+            Or to look at it in the form of a role cookbook. The same effective role just in cookbook metadata, attributes, and recipes. You can see the same role data, the recipes are pulled in via include_recipe and the application port is set in the attributes file.
           </td>
         </div>
         </tr>
@@ -514,7 +514,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -384px" href="img/52.png" name="52"></a>
           </td>
           <td class="notes">
-            
+            Converting this to a Policyfile is fairly straightforward. We have the same run list as with the other forms, and notably the attributes are exactly the same as in the role cookbook making the conversion even easier.
           </td>
         </div>
         </tr>
@@ -523,7 +523,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -768px" href="img/53.png" name="53"></a>
           </td>
           <td class="notes">
-            
+            Moving on to an environment; here we have a version constraint to lock the postgresql cookbook and an attribute to set Postgres' data directory.
           </td>
         </div>
         </tr>
@@ -532,7 +532,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1152px" href="img/54.png" name="54"></a>
           </td>
           <td class="notes">
-            
+            Converting this to a cookbook is a bit less clear. This is following my specific version of the environment cookbook pattern, but yours may look slightly different. We pull in all our role cookbooks, in addition to the version constraint on the postgresql cookbook. Our environment attributes become cookbook attributes, and each role maps to a single recipe.
           </td>
         </div>
         </tr>
@@ -541,7 +541,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1536px" href="img/55.png" name="55"></a>
           </td>
           <td class="notes">
-            
+            Converting to a Policyfile is similarly dicey. Environments map to policy groups, but this means that it can be difficult to include cross-policy constraints. This is the most direct conversion, starting from the role policy but adding the cookbook constraint and attribute. This works as a kind-of one off but will only apply to the one "role" and we would have to update the policy as we move things through the pipeline if we want different versions of postgresql in different policy groups.
           </td>
         </div>
         </tr>
@@ -550,7 +550,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1920px" href="img/56.png" name="56"></a>
           </td>
           <td class="notes">
-            Discuss the chef push command and how to use it.
+            A more useful translation is often to use a snippet of Policyfile code that can be shared between the multiple policies. This handles some of the possible use cases, but remember to mesh this on top of the single release pipeline structure.
           </td>
         </div>
         </tr>
@@ -559,7 +559,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2304px" href="img/57.png" name="57"></a>
           </td>
           <td class="notes">
-            Jenkins, CI, maybe ChefSpec and InSpec?
+            Another option for long-term version restrictions on community cookbooks is to put a stubby wrapper in the policy repo's cookbooks.
           </td>
         </div>
         </tr>
@@ -568,7 +568,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2688px" href="img/58.png" name="58"></a>
           </td>
           <td class="notes">
-            There are four major branches of testing (unit, integration, acceptance, and smoke) but only unit and integration tests generally happen in the context of local testing. With Chef that means ChefSpec and Test Kitchen. We'll see more of InSpec later when we start writing integration tests, but for now just know it is related to Test Kitchen.
+            
           </td>
         </div>
         </tr>
@@ -577,7 +577,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3072px" href="img/59.png" name="59"></a>
           </td>
           <td class="notes">
-            Before we go over the details of how to use those tools, let's look at the theory behind the types of testing. Unit tests mean testing a single unit of code. With things like web applications a unit is usually a single class or method, but for Chef our units are more often a single recipe or a custom resource. The goal of unit testing is get high-speed tests above almost anything else. This means we focus on mocking out anything outside of the unit especially anything slow or with side effects.
+            Discuss the chef push command and how to use it.
           </td>
         </div>
         </tr>
@@ -586,7 +586,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3456px" href="img/60.png" name="60"></a>
           </td>
           <td class="notes">
-            This makes unit tests a great choice for testing edge cases, complex inputs, and regression checks. Because unit tests are generally much faster than integration tests, we can have far more of them without our tests taking a frustrating amount of time.
+            Jenkins, CI, maybe ChefSpec and InSpec?
           </td>
         </div>
         </tr>
@@ -595,7 +595,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -0px" href="img/61.png" name="61"></a>
           </td>
           <td class="notes">
-            Integration tests are the other side of the coin. We throw all the units in a big pile and light it on fire to see what happens. This means tests take a lot longer since we let them do the whole side-effects thing, and rely on higher-level isolation for repeatability.
+            There are four major branches of testing (unit, integration, acceptance, and smoke) but only unit and integration tests generally happen in the context of local testing. With Chef that means ChefSpec and Test Kitchen. We'll see more of InSpec later when we start writing integration tests, but for now just know it is related to Test Kitchen.
           </td>
         </div>
         </tr>
@@ -604,7 +604,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -384px" href="img/62.png" name="62"></a>
           </td>
           <td class="notes">
-            So this means generally we use integration tests to look at bigger slices of real-world use cases. Sometimes they can also be used for performance analysis, but beware of how much the test environment impacts the numbers, you probably can't compare directly to production.
+            Before we go over the details of how to use those tools, let's look at the theory behind the types of testing. Unit tests mean testing a single unit of code. With things like web applications a unit is usually a single class or method, but for Chef our units are more often a single recipe or a custom resource. The goal of unit testing is get high-speed tests above almost anything else. This means we focus on mocking out anything outside of the unit especially anything slow or with side effects.
           </td>
         </div>
         </tr>
@@ -613,7 +613,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -768px" href="img/63.png" name="63"></a>
           </td>
           <td class="notes">
-            ChefSpec is the primary unit testing tool for Chef. It is a set of RSpec helpers and extensions for running a Chef converge without actually modifying the system. By default all providers are stubbed to be a no-op, but you can re-enable specific ones for testing.
+            This makes unit tests a great choice for testing edge cases, complex inputs, and regression checks. Because unit tests are generally much faster than integration tests, we can have far more of them without our tests taking a frustrating amount of time.
           </td>
         </div>
         </tr>
@@ -622,7 +622,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1152px" href="img/64.png" name="64"></a>
           </td>
           <td class="notes">
-            Test Kitchen is a suite of tools to create a blank VM using any of a number of drivers (Vagrant, AWS, OpenStack, Docker), install Chef and copy our cookbook(s) to the VM, run a normal Chef converge, and then run some tests to confirm the cookbook did what we think it was supposed to.
+            Integration tests are the other side of the coin. We throw all the units in a big pile and light it on fire to see what happens. This means tests take a lot longer since we let them do the whole side-effects thing, and rely on higher-level isolation for repeatability.
           </td>
         </div>
         </tr>
@@ -631,7 +631,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1536px" href="img/65.png" name="65"></a>
           </td>
           <td class="notes">
-            Before we dive into the specifics of ChefSpec, let's talk about writing RSpec tests in general. ChefSpec builds on top of RSpec so you need to walk before you can run (or converge, ::cymbal crash::).
+            So this means generally we use integration tests to look at bigger slices of real-world use cases. Sometimes they can also be used for performance analysis, but beware of how much the test environment impacts the numbers, you probably can't compare directly to production.
           </td>
         </div>
         </tr>
@@ -640,7 +640,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1920px" href="img/66.png" name="66"></a>
           </td>
           <td class="notes">
-            The simplest possible RSpec test. We have one example group, created using "describe" and labeled "a thing". Inside that is one example ("it") labeled "is a thing". Group and example labels can be anything, and we'll cover them in more detail in a moment, but overall the standard is to make the RSpec code read like prose. Inside the example we have one expectation ("expect()"), in this case just comparing 1==1.
+            ChefSpec is the primary unit testing tool for Chef. It is a set of RSpec helpers and extensions for running a Chef converge without actually modifying the system. By default all providers are stubbed to be a no-op, but you can re-enable specific ones for testing.
           </td>
         </div>
         </tr>
@@ -649,7 +649,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2304px" href="img/67.png" name="67"></a>
           </td>
           <td class="notes">
-            
+            Test Kitchen is a suite of tools to create a blank VM using any of a number of drivers (Vagrant, AWS, OpenStack, Docker), install Chef and copy our cookbook(s) to the VM, run a normal Chef converge, and then run some tests to confirm the cookbook did what we think it was supposed to.
           </td>
         </div>
         </tr>
@@ -658,7 +658,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2688px" href="img/68.png" name="68"></a>
           </td>
           <td class="notes">
-            
+            Before we dive into the specifics of ChefSpec, let's talk about writing RSpec tests in general. ChefSpec builds on top of RSpec so you need to walk before you can run (or converge, ::cymbal crash::).
           </td>
         </div>
         </tr>
@@ -667,7 +667,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -3072px" href="img/69.png" name="69"></a>
           </td>
           <td class="notes">
-            
+            The simplest possible RSpec test. We have one example group, created using "describe" and labeled "a thing". Inside that is one example ("it") labeled "is a thing". Group and example labels can be anything, and we'll cover them in more detail in a moment, but overall the standard is to make the RSpec code read like prose. Inside the example we have one expectation ("expect()"), in this case just comparing 1==1.
           </td>
         </div>
         </tr>
@@ -1007,6 +1007,33 @@ table{border-collapse:collapse;border-spacing:0}
         <tr class="slide">
           <td>
             <a class="thumbnail" style="background-image: url(img/sprite-10.png);background-position: 0 -2304px" href="img/107.png" name="107"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-10.png);background-position: 0 -2688px" href="img/108.png" name="108"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-10.png);background-position: 0 -3072px" href="img/109.png" name="109"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-10.png);background-position: 0 -3456px" href="img/110.png" name="110"></a>
           </td>
           <td class="notes">
             How this workflow operates with a team.
