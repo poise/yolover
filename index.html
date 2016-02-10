@@ -46,7 +46,7 @@ table{border-collapse:collapse;border-spacing:0}
       <div class="preamble">
         <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
         <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
-        <p>This version compiled on 2016-02-08 21:23:41 -0800</p>
+        <p>This version compiled on 2016-02-10 11:54:48 -0800</p>
       </div>
       <hr />
       <table>
@@ -64,7 +64,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -384px" href="img/2.png" name="2"></a>
           </td>
           <td class="notes">
-            10km view of a workflow
+            For those of little patience, let's begin with a quick overview of how policies work.
           </td>
         </div>
         </tr>
@@ -73,7 +73,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -768px" href="img/3.png" name="3"></a>
           </td>
           <td class="notes">
-            
+            Any Chef workflow is going to have to hit four major points: writing the code, testing the code locally, managing some kind of staging or pre-production environment, and rolling things out to production.
           </td>
         </div>
         </tr>
@@ -82,7 +82,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1152px" href="img/4.png" name="4"></a>
           </td>
           <td class="notes">
-            Policy name corresponds to cluster name, policy group to stage. This is like role and chef environment in the beforetime. A node can be attached to exactly one policy (name) and one policy group.
+            A few words you might not have seen before. The /usr/bin/chef command is a new command line tool that comes with ChefDK, kind of like knife but handles higher-level operations including working with policies. Policyfile, or Policyfile.rb, is a Ruby code file containing the description of a policy. Each node is attached to a single policy name and a single policy group, the policy name is like the role of the node and the group is like its environment. A compiled policy, or Policyfile.lock, is a snapshot of a completely resolved policy like Gemfile.lock or Berksfile.lock.
           </td>
         </div>
         </tr>
@@ -91,7 +91,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1536px" href="img/5.png" name="5"></a>
           </td>
           <td class="notes">
-            
+            A compiled policy on-disk is a JSON document with all the information from the Ruby source code as well as the specific cookbook versions that are going to be used with the policy and where they come from.
           </td>
         </div>
         </tr>
