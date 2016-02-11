@@ -46,7 +46,7 @@ table{border-collapse:collapse;border-spacing:0}
       <div class="preamble">
         <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
         <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
-        <p>This version compiled on 2016-02-10 11:54:48 -0800</p>
+        <p>This version compiled on 2016-02-10 17:59:18 -0800</p>
       </div>
       <hr />
       <table>
@@ -100,7 +100,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1920px" href="img/6.png" name="6"></a>
           </td>
           <td class="notes">
-            
+            The two main commands to get started with policies are "chef install" and "chef push". install works like "berks install", compiling the policy to a single snapshot and downloading all needed cookbooks to ~/.chefdk. push replaces commands like "berks upload" and "knife cookbook upload" to send the compiled policy and all the cookbooks it is using up to the Chef Server.
           </td>
         </div>
         </tr>
@@ -181,7 +181,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1536px" href="img/15.png" name="15"></a>
           </td>
           <td class="notes">
-            Talk about the downsides of the flow. Single pipeline, machine ownership, etc.
+            
           </td>
         </div>
         </tr>
@@ -199,7 +199,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -2304px" href="img/17.png" name="17"></a>
           </td>
           <td class="notes">
-            So by way of an example, let's look at a case with two people trying to push an update to a cluster with three stages.
+            
           </td>
         </div>
         </tr>
@@ -208,7 +208,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -2688px" href="img/18.png" name="18"></a>
           </td>
           <td class="notes">
-            First the green user compiles their policy, and pushes the compiled policy to stage one.
+            By default all policy commands will look for a file named "Policyfile.rb" in the current directory. This makes sense for policies driven by a top-level role cookbook, but in a flatter, central-repository-driven we will usually want a folder with each policy as its own file. Each command will accept an optional argument to specify a path to the policy source.
           </td>
         </div>
         </tr>
@@ -217,7 +217,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -3072px" href="img/19.png" name="19"></a>
           </td>
           <td class="notes">
-            They do whatever verifications are needed (not pictured), and then proceed to push the compiled policy to stage two. Then let's say they get bored and go out to lunch.
+            Talk about the downsides of the flow. Single pipeline, machine ownership, etc.
           </td>
         </div>
         </tr>
@@ -226,7 +226,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -3456px" href="img/20.png" name="20"></a>
           </td>
           <td class="notes">
-            The orange user gets back from lunch early, compiles their own modified policy, and rolls it out to all three stages (again, there would be some verification/burn in between stages but that isn't the point).
+            
           </td>
         </div>
         </tr>
@@ -235,7 +235,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -0px" href="img/21.png" name="21"></a>
           </td>
           <td class="notes">
-            Then the green user gets back and finishes their deploy. In the end we have an inconsistent cluster. Stages one and two are running the orange policy but stage three has the green policy.
+            So by way of an example, let's look at a case with two people trying to push an update to a cluster with three stages.
           </td>
         </div>
         </tr>
@@ -244,7 +244,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -384px" href="img/22.png" name="22"></a>
           </td>
           <td class="notes">
-            So in short, be aware of when a deploy is happening. If you are deploying on a cluster that you own, this is somewhat easier. If deploying on client clusters, double check with their team(s).
+            First the green user compiles their policy, and pushes the compiled policy to stage one.
           </td>
         </div>
         </tr>
@@ -253,7 +253,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -768px" href="img/23.png" name="23"></a>
           </td>
           <td class="notes">
-            
+            They do whatever verifications are needed (not pictured), and then proceed to push the compiled policy to stage two. Then let's say they get bored and go out to lunch.
           </td>
         </div>
         </tr>
@@ -262,7 +262,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1152px" href="img/24.png" name="24"></a>
           </td>
           <td class="notes">
-            
+            The orange user gets back from lunch early, compiles their own modified policy, and rolls it out to all three stages (again, there would be some verification/burn in between stages but that isn't the point).
           </td>
         </div>
         </tr>
@@ -271,7 +271,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1536px" href="img/25.png" name="25"></a>
           </td>
           <td class="notes">
-            
+            Then the green user gets back and finishes their deploy. In the end we have an inconsistent cluster. Stages one and two are running the orange policy but stage three has the green policy.
           </td>
         </div>
         </tr>
@@ -280,7 +280,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1920px" href="img/26.png" name="26"></a>
           </td>
           <td class="notes">
-            
+            So in short, be aware of when a deploy is happening. If you are deploying on a cluster that you own, this is somewhat easier. If deploying on client clusters, double check with their team(s).
           </td>
         </div>
         </tr>
@@ -289,7 +289,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -2304px" href="img/27.png" name="27"></a>
           </td>
           <td class="notes">
-            You can't use roles in the run lists of a Policyfile. The biggest case this impacts is having a "base" role applied to all nodes. You can support most of this use case using a shared base Policyfile that is included in all the others. This allows following same snapshot-based workflow while still having some shared data.
+            
           </td>
         </div>
         </tr>
@@ -298,7 +298,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -2688px" href="img/28.png" name="28"></a>
           </td>
           <td class="notes">
-            A downside compared to a Berkshelf-based workflow is that single cookbooks can't be upgraded without fully re-compiling the policy. Support is planned for the future, but for now take care to diff your compiled policy before pushing to ensure you aren't releasing something unexpected.
+            
           </td>
         </div>
         </tr>
@@ -307,7 +307,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3072px" href="img/29.png" name="29"></a>
           </td>
           <td class="notes">
-            ChefDK in general and the Policyfile tools in specific are evolving rapidly. Not everything out there has support for the new workflows but it will probably be added soon. If you run into an unsupported corner of the ecosystem, you can always ask me.
+            
           </td>
         </div>
         </tr>
@@ -316,7 +316,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3456px" href="img/30.png" name="30"></a>
           </td>
           <td class="notes">
-            So to summarize, some of the major things to look out for are pipeline stomping, data management, and possibly wonky integrations.
+            
           </td>
         </div>
         </tr>
@@ -325,7 +325,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -0px" href="img/31.png" name="31"></a>
           </td>
           <td class="notes">
-            Release process or lack thereof. Benefits and downsides of a semver process. Talk about yolover snapshots.
+            You can't use roles in the run lists of a Policyfile. The biggest case this impacts is having a "base" role applied to all nodes. You can support most of this use case using a shared base Policyfile that is included in all the others. This allows following same snapshot-based workflow while still having some shared data.
           </td>
         </div>
         </tr>
@@ -334,7 +334,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -384px" href="img/32.png" name="32"></a>
           </td>
           <td class="notes">
-            A quick version of a traditional Chef cookbook release process. First we updated the cookbook version in metadata.rb, and make sure to follow SemVer. Then we make a git tag, maybe use Stove to push to a Supermarket site, and `berks upload` to push it to a Chef Server. Then we edit the Chef environment for each stage to roll the new version out, making sure chef-client completes successfully on each stage. Importantly this process is cookbook-centric, so we release each cookbook independently.
+            A downside compared to a Berkshelf-based workflow is that single cookbooks can't be upgraded without fully re-compiling the policy. Support is planned for the future, but for now take care to diff your compiled policy before pushing to ensure you aren't releasing something unexpected.
           </td>
         </div>
         </tr>
@@ -343,7 +343,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -768px" href="img/33.png" name="33"></a>
           </td>
           <td class="notes">
-            Usually a release process like this is coupled with SemVer so that we can use that semantic information to structure how new releases flow out to different environments and users. It allows using the pessimistic range operator in environments and dependencies, leaving the version solver in Chef Server and Berkshelf to work out the details.
+            ChefDK in general and the Policyfile tools in specific are evolving rapidly. Not everything out there has support for the new workflows but it will probably be added soon. If you run into an unsupported corner of the ecosystem, you can always ask me.
           </td>
         </div>
         </tr>
@@ -352,7 +352,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1152px" href="img/34.png" name="34"></a>
           </td>
           <td class="notes">
-            But it isn't all positive. Tracking which changes are compatible with which other changes presents some cognitive load during development. Additionally when running a release process you often need to release multiple cookbooks in the right order. On top of that, Chef's version solver is very limited and only supports three component x.y.z version numbers, no extra tags like -pre or -rc1. This makes it difficult to handle releases when different environments are targeting different git branches of the same cookbook.
+            So to summarize, some of the major things to look out for are pipeline stomping, data management, and possibly wonky integrations.
           </td>
         </div>
         </tr>
@@ -361,7 +361,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1536px" href="img/35.png" name="35"></a>
           </td>
           <td class="notes">
-            That's a lot of work.
+            Release process or lack thereof. Benefits and downsides of a semver process. Talk about yolover snapshots.
           </td>
         </div>
         </tr>
@@ -370,7 +370,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1920px" href="img/36.png" name="36"></a>
           </td>
           <td class="notes">
-            So we want a lighter weight solution. Enter YoloVer: a workflow based around snapshots of a whole run list instead of multiple discrete projects with their own release processes. As you might imagine, this workflow is based around Policyfiles. Using all the tools we just learned, we can manage cookbook deployments with a granularity of whole-repository snapshots. This means we don't need the overhead of a per-cookbook release system but still retain control over rollouts.
+            A quick version of a traditional Chef cookbook release process. First we updated the cookbook version in metadata.rb, and make sure to follow SemVer. Then we make a git tag, maybe use Stove to push to a Supermarket site, and `berks upload` to push it to a Chef Server. Then we edit the Chef environment for each stage to roll the new version out, making sure chef-client completes successfully on each stage. Importantly this process is cookbook-centric, so we release each cookbook independently.
           </td>
         </div>
         </tr>
@@ -379,7 +379,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -2304px" href="img/37.png" name="37"></a>
           </td>
           <td class="notes">
-            So let's look at an example git repository for a hypothetical monitoring team. We have a folder of local cookbooks specific to the team, and a folder of policies for each type of server we are going to maintain.
+            Usually a release process like this is coupled with SemVer so that we can use that semantic information to structure how new releases flow out to different environments and users. It allows using the pessimistic range operator in environments and dependencies, leaving the version solver in Chef Server and Berkshelf to work out the details.
           </td>
         </div>
         </tr>
@@ -388,7 +388,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -2688px" href="img/38.png" name="38"></a>
           </td>
           <td class="notes">
-            For the "db" policy we have all the things we saw before. We set the name, as always. Then we set two default sources. Remember these have to be non-overlapping, but it means everything in the cookbooks/ folder will be picked up automatically when needed. We also set one cookbook as coming from a specific git repository. When we take the snapshot, we'll capture whatever is in the master branch of that repository and use it until we recompile. Finally we set our run list, using cookbooks from all three sources.
+            But it isn't all positive. Tracking which changes are compatible with which other changes presents some cognitive load during development. Additionally when running a release process you often need to release multiple cookbooks in the right order. On top of that, Chef's version solver is very limited and only supports three component x.y.z version numbers, no extra tags like -pre or -rc1. This makes it difficult to handle releases when different environments are targeting different git branches of the same cookbook.
           </td>
         </div>
         </tr>
@@ -397,7 +397,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -3072px" href="img/39.png" name="39"></a>
           </td>
           <td class="notes">
-            
+            That's a lot of work.
           </td>
         </div>
         </tr>
@@ -406,7 +406,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -3456px" href="img/40.png" name="40"></a>
           </td>
           <td class="notes">
-            Having a production workflow is all well and good, but development starts on a workstation somewhere and generally we want to try things locally first.
+            So we want a lighter weight solution. Enter YoloVer: a workflow based around snapshots of a whole run list instead of multiple discrete projects with their own release processes. As you might imagine, this workflow is based around Policyfiles. Using all the tools we just learned, we can manage cookbook deployments with a granularity of whole-repository snapshots. This means we don't need the overhead of a per-cookbook release system but still retain control over rollouts.
           </td>
         </div>
         </tr>
@@ -415,7 +415,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -0px" href="img/41.png" name="41"></a>
           </td>
           <td class="notes">
-            
+            So let's look at an example git repository for a hypothetical monitoring team. We have a folder of local cookbooks specific to the team, and a folder of policies for each type of server we are going to maintain.
           </td>
         </div>
         </tr>
@@ -424,7 +424,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -384px" href="img/42.png" name="42"></a>
           </td>
           <td class="notes">
-            Let's start with a basic Test Kitchen config. The is named .kitchen.yml and it goes in the base of the repository (remember, this isn't for testing single cookbooks, we'll cover that later). The overall structure of Test Kitchen is a driver configuration which determines how we'll create VMs, a list of platforms to test on, and then a list of test suites.
+            For the "db" policy we have all the things we saw before. We set the name, as always. Then we set two default sources. Remember these have to be non-overlapping, but it means everything in the cookbooks/ folder will be picked up automatically when needed. We also set one cookbook as coming from a specific git repository. When we take the snapshot, we'll capture whatever is in the master branch of that repository and use it until we recompile. Finally we set our run list, using cookbooks from all three sources.
           </td>
         </div>
         </tr>
@@ -433,7 +433,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -768px" href="img/43.png" name="43"></a>
           </td>
           <td class="notes">
-            One of the core concepts of Test Kitchen is the instance matrix. An instance is the combination of a platform and a suite, using the names of each to form the name of the instance.
+            
           </td>
         </div>
         </tr>
@@ -442,7 +442,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1152px" href="img/44.png" name="44"></a>
           </td>
           <td class="notes">
-            
+            Having a production workflow is all well and good, but development starts on a workstation somewhere and generally we want to try things locally first.
           </td>
         </div>
         </tr>
@@ -460,7 +460,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1920px" href="img/46.png" name="46"></a>
           </td>
           <td class="notes">
-            
+            Let's start with a basic Test Kitchen config. The is named .kitchen.yml and it goes in the base of the repository (remember, this isn't for testing single cookbooks, we'll cover that later). The overall structure of Test Kitchen is a driver configuration which determines how we'll create VMs, a list of platforms to test on, and then a list of test suites.
           </td>
         </div>
         </tr>
@@ -469,7 +469,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -2304px" href="img/47.png" name="47"></a>
           </td>
           <td class="notes">
-            
+            One of the core concepts of Test Kitchen is the instance matrix. An instance is the combination of a platform and a suite, using the names of each to form the name of the instance.
           </td>
         </div>
         </tr>
@@ -478,7 +478,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -2688px" href="img/48.png" name="48"></a>
           </td>
           <td class="notes">
-            Putting it all together we get this Test Kitchen config. We haven't set up any actual tests yet, but this will let us run the policy in a VM and see if it converges cleanly.
+            
           </td>
         </div>
         </tr>
@@ -487,7 +487,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3072px" href="img/49.png" name="49"></a>
           </td>
           <td class="notes">
-            Switching to Policyfiles usually means rewriting some amount of roles, environments, and the cookbook equivalents of each to the Policyfile structure. Let's examine each of those.
+            
           </td>
         </div>
         </tr>
@@ -496,7 +496,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3456px" href="img/50.png" name="50"></a>
           </td>
           <td class="notes">
-            A pretty simple role for deploying some kind of application. We're pulling in some kind of base recipe, an application recipe, and set a node attribute for the application's port.
+            
           </td>
         </div>
         </tr>
@@ -505,7 +505,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -0px" href="img/51.png" name="51"></a>
           </td>
           <td class="notes">
-            Or to look at it in the form of a role cookbook. The same effective role just in cookbook metadata, attributes, and recipes. You can see the same role data, the recipes are pulled in via include_recipe and the application port is set in the attributes file.
+            
           </td>
         </div>
         </tr>
@@ -514,7 +514,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -384px" href="img/52.png" name="52"></a>
           </td>
           <td class="notes">
-            Converting this to a Policyfile is fairly straightforward. We have the same run list as with the other forms, and notably the attributes are exactly the same as in the role cookbook making the conversion even easier.
+            Putting it all together we get this Test Kitchen config. We haven't set up any actual tests yet, but this will let us run the policy in a VM and see if it converges cleanly.
           </td>
         </div>
         </tr>
@@ -523,7 +523,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -768px" href="img/53.png" name="53"></a>
           </td>
           <td class="notes">
-            Moving on to an environment; here we have a version constraint to lock the postgresql cookbook and an attribute to set Postgres' data directory.
+            Switching to Policyfiles usually means rewriting some amount of roles, environments, and the cookbook equivalents of each to the Policyfile structure. Let's examine each of those.
           </td>
         </div>
         </tr>
@@ -532,7 +532,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1152px" href="img/54.png" name="54"></a>
           </td>
           <td class="notes">
-            Converting this to a cookbook is a bit less clear. This is following my specific version of the environment cookbook pattern, but yours may look slightly different. We pull in all our role cookbooks, in addition to the version constraint on the postgresql cookbook. Our environment attributes become cookbook attributes, and each role maps to a single recipe.
+            A pretty simple role for deploying some kind of application. We're pulling in some kind of base recipe, an application recipe, and set a node attribute for the application's port.
           </td>
         </div>
         </tr>
@@ -541,7 +541,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1536px" href="img/55.png" name="55"></a>
           </td>
           <td class="notes">
-            Converting to a Policyfile is similarly dicey. Environments map to policy groups, but this means that it can be difficult to include cross-policy constraints. This is the most direct conversion, starting from the role policy but adding the cookbook constraint and attribute. This works as a kind-of one off but will only apply to the one "role" and we would have to update the policy as we move things through the pipeline if we want different versions of postgresql in different policy groups.
+            Or to look at it in the form of a role cookbook. The same effective role just in cookbook metadata, attributes, and recipes. You can see the same role data, the recipes are pulled in via include_recipe and the application port is set in the attributes file.
           </td>
         </div>
         </tr>
@@ -550,7 +550,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1920px" href="img/56.png" name="56"></a>
           </td>
           <td class="notes">
-            A more useful translation is often to use a snippet of Policyfile code that can be shared between the multiple policies. This handles some of the possible use cases, but remember to mesh this on top of the single release pipeline structure.
+            Converting this to a Policyfile is fairly straightforward. We have the same run list as with the other forms, and notably the attributes are exactly the same as in the role cookbook making the conversion even easier.
           </td>
         </div>
         </tr>
@@ -559,7 +559,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2304px" href="img/57.png" name="57"></a>
           </td>
           <td class="notes">
-            Another option for long-term version restrictions on community cookbooks is to put a stubby wrapper in the policy repo's cookbooks.
+            Moving on to an environment; here we have a version constraint to lock the postgresql cookbook and an attribute to set Postgres' data directory.
           </td>
         </div>
         </tr>
@@ -568,7 +568,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2688px" href="img/58.png" name="58"></a>
           </td>
           <td class="notes">
-            
+            Converting this to a cookbook is a bit less clear. This is following my specific version of the environment cookbook pattern, but yours may look slightly different. We pull in all our role cookbooks, in addition to the version constraint on the postgresql cookbook. Our environment attributes become cookbook attributes, and each role maps to a single recipe.
           </td>
         </div>
         </tr>
@@ -577,7 +577,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3072px" href="img/59.png" name="59"></a>
           </td>
           <td class="notes">
-            Discuss the chef push command and how to use it.
+            Converting to a Policyfile is similarly dicey. Environments map to policy groups, but this means that it can be difficult to include cross-policy constraints. This is the most direct conversion, starting from the role policy but adding the cookbook constraint and attribute. This works as a kind-of one off but will only apply to the one "role" and we would have to update the policy as we move things through the pipeline if we want different versions of postgresql in different policy groups.
           </td>
         </div>
         </tr>
@@ -586,7 +586,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3456px" href="img/60.png" name="60"></a>
           </td>
           <td class="notes">
-            Jenkins, CI, maybe ChefSpec and InSpec?
+            A more useful translation is often to use a snippet of Policyfile code that can be shared between the multiple policies. This handles some of the possible use cases, but remember to mesh this on top of the single release pipeline structure.
           </td>
         </div>
         </tr>
@@ -595,7 +595,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -0px" href="img/61.png" name="61"></a>
           </td>
           <td class="notes">
-            There are four major branches of testing (unit, integration, acceptance, and smoke) but only unit and integration tests generally happen in the context of local testing. With Chef that means ChefSpec and Test Kitchen. We'll see more of InSpec later when we start writing integration tests, but for now just know it is related to Test Kitchen.
+            Another option for long-term version restrictions on community cookbooks is to put a stubby wrapper in the policy repo's cookbooks.
           </td>
         </div>
         </tr>
@@ -604,7 +604,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -384px" href="img/62.png" name="62"></a>
           </td>
           <td class="notes">
-            Before we go over the details of how to use those tools, let's look at the theory behind the types of testing. Unit tests mean testing a single unit of code. With things like web applications a unit is usually a single class or method, but for Chef our units are more often a single recipe or a custom resource. The goal of unit testing is get high-speed tests above almost anything else. This means we focus on mocking out anything outside of the unit especially anything slow or with side effects.
+            
           </td>
         </div>
         </tr>
@@ -613,7 +613,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -768px" href="img/63.png" name="63"></a>
           </td>
           <td class="notes">
-            This makes unit tests a great choice for testing edge cases, complex inputs, and regression checks. Because unit tests are generally much faster than integration tests, we can have far more of them without our tests taking a frustrating amount of time.
+            Discuss the chef push command and how to use it.
           </td>
         </div>
         </tr>
@@ -622,7 +622,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1152px" href="img/64.png" name="64"></a>
           </td>
           <td class="notes">
-            Integration tests are the other side of the coin. We throw all the units in a big pile and light it on fire to see what happens. This means tests take a lot longer since we let them do the whole side-effects thing, and rely on higher-level isolation for repeatability.
+            Jenkins, CI, maybe ChefSpec and InSpec?
           </td>
         </div>
         </tr>
@@ -631,7 +631,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1536px" href="img/65.png" name="65"></a>
           </td>
           <td class="notes">
-            So this means generally we use integration tests to look at bigger slices of real-world use cases. Sometimes they can also be used for performance analysis, but beware of how much the test environment impacts the numbers, you probably can't compare directly to production.
+            There are four major branches of testing (unit, integration, acceptance, and smoke) but only unit and integration tests generally happen in the context of local testing. With Chef that means ChefSpec and Test Kitchen. We'll see more of InSpec later when we start writing integration tests, but for now just know it is related to Test Kitchen.
           </td>
         </div>
         </tr>
@@ -640,7 +640,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1920px" href="img/66.png" name="66"></a>
           </td>
           <td class="notes">
-            ChefSpec is the primary unit testing tool for Chef. It is a set of RSpec helpers and extensions for running a Chef converge without actually modifying the system. By default all providers are stubbed to be a no-op, but you can re-enable specific ones for testing.
+            Before we go over the details of how to use those tools, let's look at the theory behind the types of testing. Unit tests mean testing a single unit of code. With things like web applications a unit is usually a single class or method, but for Chef our units are more often a single recipe or a custom resource. The goal of unit testing is get high-speed tests above almost anything else. This means we focus on mocking out anything outside of the unit especially anything slow or with side effects.
           </td>
         </div>
         </tr>
@@ -649,7 +649,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2304px" href="img/67.png" name="67"></a>
           </td>
           <td class="notes">
-            Test Kitchen is a suite of tools to create a blank VM using any of a number of drivers (Vagrant, AWS, OpenStack, Docker), install Chef and copy our cookbook(s) to the VM, run a normal Chef converge, and then run some tests to confirm the cookbook did what we think it was supposed to.
+            This makes unit tests a great choice for testing edge cases, complex inputs, and regression checks. Because unit tests are generally much faster than integration tests, we can have far more of them without our tests taking a frustrating amount of time.
           </td>
         </div>
         </tr>
@@ -658,7 +658,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2688px" href="img/68.png" name="68"></a>
           </td>
           <td class="notes">
-            Before we dive into the specifics of ChefSpec, let's talk about writing RSpec tests in general. ChefSpec builds on top of RSpec so you need to walk before you can run (or converge, ::cymbal crash::).
+            Integration tests are the other side of the coin. We throw all the units in a big pile and light it on fire to see what happens. This means tests take a lot longer since we let them do the whole side-effects thing, and rely on higher-level isolation for repeatability.
           </td>
         </div>
         </tr>
@@ -667,7 +667,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -3072px" href="img/69.png" name="69"></a>
           </td>
           <td class="notes">
-            The simplest possible RSpec test. We have one example group, created using "describe" and labeled "a thing". Inside that is one example ("it") labeled "is a thing". Group and example labels can be anything, and we'll cover them in more detail in a moment, but overall the standard is to make the RSpec code read like prose. Inside the example we have one expectation ("expect()"), in this case just comparing 1==1.
+            So this means generally we use integration tests to look at bigger slices of real-world use cases. Sometimes they can also be used for performance analysis, but beware of how much the test environment impacts the numbers, you probably can't compare directly to production.
           </td>
         </div>
         </tr>
@@ -676,7 +676,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -3456px" href="img/70.png" name="70"></a>
           </td>
           <td class="notes">
-            
+            ChefSpec is the primary unit testing tool for Chef. It is a set of RSpec helpers and extensions for running a Chef converge without actually modifying the system. By default all providers are stubbed to be a no-op, but you can re-enable specific ones for testing.
           </td>
         </div>
         </tr>
@@ -685,7 +685,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -0px" href="img/71.png" name="71"></a>
           </td>
           <td class="notes">
-            
+            Test Kitchen is a suite of tools to create a blank VM using any of a number of drivers (Vagrant, AWS, OpenStack, Docker), install Chef and copy our cookbook(s) to the VM, run a normal Chef converge, and then run some tests to confirm the cookbook did what we think it was supposed to.
           </td>
         </div>
         </tr>
@@ -694,7 +694,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -384px" href="img/72.png" name="72"></a>
           </td>
           <td class="notes">
-            
+            Before we dive into the specifics of ChefSpec, let's talk about writing RSpec tests in general. ChefSpec builds on top of RSpec so you need to walk before you can run (or converge, ::cymbal crash::).
           </td>
         </div>
         </tr>
@@ -703,7 +703,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -768px" href="img/73.png" name="73"></a>
           </td>
           <td class="notes">
-            
+            The simplest possible RSpec test. We have one example group, created using "describe" and labeled "a thing". Inside that is one example ("it") labeled "is a thing". Group and example labels can be anything, and we'll cover them in more detail in a moment, but overall the standard is to make the RSpec code read like prose. Inside the example we have one expectation ("expect()"), in this case just comparing 1==1.
           </td>
         </div>
         </tr>
@@ -1034,6 +1034,42 @@ table{border-collapse:collapse;border-spacing:0}
         <tr class="slide">
           <td>
             <a class="thumbnail" style="background-image: url(img/sprite-10.png);background-position: 0 -3456px" href="img/110.png" name="110"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-11.png);background-position: 0 -0px" href="img/111.png" name="111"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-11.png);background-position: 0 -384px" href="img/112.png" name="112"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-11.png);background-position: 0 -768px" href="img/113.png" name="113"></a>
+          </td>
+          <td class="notes">
+            
+          </td>
+        </div>
+        </tr>
+        <tr class="slide">
+          <td>
+            <a class="thumbnail" style="background-image: url(img/sprite-11.png);background-position: 0 -1152px" href="img/114.png" name="114"></a>
           </td>
           <td class="notes">
             How this workflow operates with a team.
