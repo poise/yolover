@@ -46,7 +46,7 @@ table{border-collapse:collapse;border-spacing:0}
       <div class="preamble">
         <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
         <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
-        <p>This version compiled on 2016-02-10 22:41:44 -0800</p>
+        <p>This version compiled on 2016-02-14 00:32:41 -0800</p>
       </div>
       <hr />
       <table>
@@ -109,9 +109,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -2304px" href="img/7.png" name="7"></a>
           </td>
           <td class="notes">
-            [TODO words]
-
-Overview of what goes in a Policyfile. Folder layout for multiple policies. Git integration.
+            With that short version out of the way, let's look at a long version of what goes in a Policyfile and how to use them.
           </td>
         </div>
         </tr>
@@ -120,7 +118,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -2688px" href="img/8.png" name="8"></a>
           </td>
           <td class="notes">
-            
+            The three main directives: `name`, `default_source`, and `run_list`. The name, as you might imagine, sets the name of the policy. The `default_source` directive adds to the list of default sources used to find cookbooks without an explicit source. The `run_list` directive sets the primary run list for the policy, or put more directly, what nodes assigned to this policy will execute.
           </td>
         </div>
         </tr>
@@ -129,7 +127,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -3072px" href="img/9.png" name="9"></a>
           </td>
           <td class="notes">
-            You can either give multiple arguments or an array.
+            `run_list` accepts either multiple arguments or an array of recipe names. You can use the `recipe[name]` syntax but you cannot use roles in a policy's run list so this is generally redundant.
           </td>
         </div>
         </tr>
@@ -138,7 +136,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -3456px" href="img/10.png" name="10"></a>
           </td>
           <td class="notes">
-            Introduce named run lists, like override run lists of yore. We can't use override run lists themselves because we need to use only the cookbooks the policy knows about.
+            In addition to setting the primary run list, we can also set addition named run lists via `named_run_list`. These take the place of traditional override run lists (`chef-client -o`) while still allowing the policy to know about the potential override so that its cookbooks are included in the compiled snapshot.
           </td>
         </div>
         </tr>
@@ -147,7 +145,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -0px" href="img/11.png" name="11"></a>
           </td>
           <td class="notes">
-            
+            While the default_source lines specify the fallbacks for where to find cookbooks, it can also be overridden on a per-cookbook basis. This can also include version overrides like in an environment. Sources supported include path for things in the same repo or git/github to pull directly from a git branch or tag.
           </td>
         </div>
         </tr>
@@ -156,7 +154,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -384px" href="img/12.png" name="12"></a>
           </td>
           <td class="notes">
-            Rather than have to state specifically where each cookbook comes from, we can provider one or more default sources. The most common is to use https://supermarket.chef.io/, but we can also pull in from a private Supermarket, an organization on a Chef Server, or folder of cookbooks.
+            The most common default source is to use https://supermarket.chef.io/, but we can also pull in from a private Supermarket, an organization on a Chef Server, or monorepo-style folder of cookbooks.
           </td>
         </div>
         </tr>
@@ -165,7 +163,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -768px" href="img/13.png" name="13"></a>
           </td>
           <td class="notes">
-            
+            If you have a cookbook that is present in multiple default sources, you will have to resolve which source is preferred. This ensures there is never confusion about where a cookbook is coming from.
           </td>
         </div>
         </tr>
@@ -174,7 +172,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1152px" href="img/14.png" name="14"></a>
           </td>
           <td class="notes">
-            
+            Policies can also include node attributes, like a role or environment. Unlike those, these are set using the syntax from cookbook attributes files, which makes setting complex nested values a little less verbose.
           </td>
         </div>
         </tr>
@@ -183,7 +181,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1536px" href="img/15.png" name="15"></a>
           </td>
           <td class="notes">
-            
+            That covers the basic syntax and data for what goes in a Policyfile, now let's look at the main commands. As mentioned before, the first command you'll usually encounter is `chef install`. It takes an optional path to the file to process, but otherwise uses `./Policyfile.rb`. If the `Policyfile.lock` file doesn't exist, this command will run a version solver to generate a set of cookbooks that matches requirements from the policy and the various `depends` values in the cookbooks being used. This compiled policy snapshot is then written to disk for next time, and all the cookbooks used in it are downloaded to the local cache in a manner similar to Berkshelf or Bundler.
           </td>
         </div>
         </tr>
@@ -192,7 +190,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1920px" href="img/16.png" name="16"></a>
           </td>
           <td class="notes">
-            
+            `chef update` is currently just a slight modification to the install command in that it forces a policy recompile even if there is an existing lockfile. At some point in the future support will be added for more fine-grained updates, but for now just use it when you want to re-solve a policy to pick up new or changed cookbooks.
           </td>
         </div>
         </tr>
@@ -201,7 +199,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -2304px" href="img/17.png" name="17"></a>
           </td>
           <td class="notes">
-            
+            And finally we have `chef push`, which acts like `berks upload` in that it reads in a solved policy (lockfile) and uploads it to a Chef Server. Unlike `berks upload` this isn't a global operation, we push a compiled policy to a specific policy group. Policy groups aren't really first class objects per se, more just a kind of tag that creates segments within a single policy. Usually this is used to implement a separation between staging and production, or whatever other organizational segments you might have. The push command will also make sure any cookbooks needed for the policy get uploaded along with it.
           </td>
         </div>
         </tr>
@@ -228,7 +226,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -3456px" href="img/20.png" name="20"></a>
           </td>
           <td class="notes">
-            Talk about the downsides of the flow. Single pipeline, machine ownership, etc.
+            Unfortunately it isn't all roses and unicorns. The Policyfile system is evolving rapidly but there are some issues to know about.
           </td>
         </div>
         </tr>
@@ -237,7 +235,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -0px" href="img/21.png" name="21"></a>
           </td>
           <td class="notes">
-            
+            The first issue is fact that all users in a policy-based system share a release pipeline for each specific policy.
           </td>
         </div>
         </tr>
@@ -255,7 +253,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -768px" href="img/23.png" name="23"></a>
           </td>
           <td class="notes">
-            First the green user compiles their policy, and pushes the compiled policy to stage one.
+            First the green user makes some changes, re-compiles their policy, and pushes the compiled policy to stage one.
           </td>
         </div>
         </tr>
@@ -300,7 +298,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -2688px" href="img/28.png" name="28"></a>
           </td>
           <td class="notes">
-            
+            A place this single pipeline issue comes into sharp focus is when dealing with a node that runs cookbooks managed by multiple teams. This may require more careful handling of who owns which pieces of the system, what the owner is responsible for, and how teams notify each other of changes.
           </td>
         </div>
         </tr>
@@ -309,7 +307,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3072px" href="img/29.png" name="29"></a>
           </td>
           <td class="notes">
-            
+            The next major stumbling block is usually around environment-level attributes. Policy attributes map nicely to a replacement for role attributes, but as policy groups aren't a first-class object themselves there is no direct replacement for environment attributes. Fortunately there are a few patterns that can help.
           </td>
         </div>
         </tr>
@@ -318,7 +316,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3456px" href="img/30.png" name="30"></a>
           </td>
           <td class="notes">
-            
+            The simplest is to use the group name as a top-level key in the attribute name for things you know will vary by group. You can access the name of the current node's policy group via `node.policy_group`. This is only workable in situations where you control how the attribute data is used though.
           </td>
         </div>
         </tr>
@@ -327,7 +325,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -0px" href="img/31.png" name="31"></a>
           </td>
           <td class="notes">
-            
+            For situations where you need to use cookbooks not explicitly designed for this, you can use a hoisting pattern to copy the attribute data out of the group-specific subtree and overlay it on the rest of the attributes. This is often the most robust solution, but the code to implement can be tricky. A simple version is shown here, but stay tuned for a reusable cookbook that implements a more robust version.
           </td>
         </div>
         </tr>
@@ -336,7 +334,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -384px" href="img/32.png" name="32"></a>
           </td>
           <td class="notes">
-            
+            And finally you can skip policy attributes altogether and store environment-level values in a data bag item. This can help with situations where you want attribute data to live outside of the life cycle of the policy itself.
           </td>
         </div>
         </tr>
@@ -381,7 +379,7 @@ Overview of what goes in a Policyfile. Folder layout for multiple policies. Git 
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -2304px" href="img/37.png" name="37"></a>
           </td>
           <td class="notes">
-            Release process or lack thereof. Benefits and downsides of a semver process. Talk about yolover snapshots.
+            
           </td>
         </div>
         </tr>
