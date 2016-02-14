@@ -46,7 +46,7 @@ table{border-collapse:collapse;border-spacing:0}
       <div class="preamble">
         <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
         <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
-        <p>This version compiled on 2016-02-14 00:32:41 -0800</p>
+        <p>This version compiled on 2016-02-14 15:50:24 -0800</p>
       </div>
       <hr />
       <table>
@@ -56,6 +56,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -64,7 +65,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -384px" href="img/2.png" name="2"></a>
           </td>
           <td class="notes">
-            For those of little patience, let's begin with a quick overview of how policies work.
+            <p>For those of little patience, let’s begin with a quick overview of how policies work.</p>
+
           </td>
         </div>
         </tr>
@@ -73,7 +75,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -768px" href="img/3.png" name="3"></a>
           </td>
           <td class="notes">
-            Any Chef workflow is going to have to hit four major points: writing the code, testing the code locally, managing some kind of staging or pre-production environment, and rolling things out to production.
+            <p>Any Chef workflow is going to have to hit four major points: writing the code, testing the code locally, managing some kind of staging or pre-production environment, and rolling things out to production.</p>
+
           </td>
         </div>
         </tr>
@@ -82,7 +85,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1152px" href="img/4.png" name="4"></a>
           </td>
           <td class="notes">
-            A few words you might not have seen before. The /usr/bin/chef command is a new command line tool that comes with ChefDK, kind of like knife but handles higher-level operations including working with policies. Policyfile, or Policyfile.rb, is a Ruby code file containing the description of a policy. Each node is attached to a single policy name and a single policy group, the policy name is like the role of the node and the group is like its environment. A compiled policy, or Policyfile.lock, is a snapshot of a completely resolved policy like Gemfile.lock or Berksfile.lock.
+            <p>A few words you might not have seen before. The /usr/bin/chef command is a new command line tool that comes with ChefDK, kind of like knife but handles higher-level operations including working with policies. Policyfile, or Policyfile.rb, is a Ruby code file containing the description of a policy. Each node is attached to a single policy name and a single policy group, the policy name is like the role of the node and the group is like its environment. A compiled policy, or Policyfile.lock, is a snapshot of a completely resolved policy like Gemfile.lock or Berksfile.lock.</p>
+
           </td>
         </div>
         </tr>
@@ -91,7 +95,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1536px" href="img/5.png" name="5"></a>
           </td>
           <td class="notes">
-            A compiled policy on-disk is a JSON document with all the information from the Ruby source code as well as the specific cookbook versions that are going to be used with the policy and where they come from.
+            <p>A compiled policy on-disk is a JSON document with all the information from the Ruby source code as well as the specific cookbook versions that are going to be used with the policy and where they come from.</p>
+
           </td>
         </div>
         </tr>
@@ -100,7 +105,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -1920px" href="img/6.png" name="6"></a>
           </td>
           <td class="notes">
-            The two main commands to get started with policies are "chef install" and "chef push". install works like "berks install", compiling the policy to a single snapshot and downloading all needed cookbooks to ~/.chefdk. push replaces commands like "berks upload" and "knife cookbook upload" to send the compiled policy and all the cookbooks it is using up to the Chef Server.
+            <p>The two main commands to get started with policies are “chef install” and “chef push”. install works like “berks install”, compiling the policy to a single snapshot and downloading all needed cookbooks to ~/.chefdk. push replaces commands like “berks upload” and “knife cookbook upload” to send the compiled policy and all the cookbooks it is using up to the Chef Server.</p>
+
           </td>
         </div>
         </tr>
@@ -109,7 +115,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -2304px" href="img/7.png" name="7"></a>
           </td>
           <td class="notes">
-            With that short version out of the way, let's look at a long version of what goes in a Policyfile and how to use them.
+            <p>With that short version out of the way, let’s look at a long version of what goes in a Policyfile and how to use them.</p>
+
           </td>
         </div>
         </tr>
@@ -118,7 +125,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -2688px" href="img/8.png" name="8"></a>
           </td>
           <td class="notes">
-            The three main directives: `name`, `default_source`, and `run_list`. The name, as you might imagine, sets the name of the policy. The `default_source` directive adds to the list of default sources used to find cookbooks without an explicit source. The `run_list` directive sets the primary run list for the policy, or put more directly, what nodes assigned to this policy will execute.
+            <p>The three main directives: <code>name</code>, <code>default_source</code>, and <code>run_list</code>. The name, as you might imagine, sets the name of the policy. The <code>default_source</code> directive adds to the list of default sources used to find cookbooks without an explicit source. The <code>run_list</code> directive sets the primary run list for the policy, or put more directly, what nodes assigned to this policy will execute.</p>
+
           </td>
         </div>
         </tr>
@@ -127,7 +135,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -3072px" href="img/9.png" name="9"></a>
           </td>
           <td class="notes">
-            `run_list` accepts either multiple arguments or an array of recipe names. You can use the `recipe[name]` syntax but you cannot use roles in a policy's run list so this is generally redundant.
+            <p><code>run_list</code> accepts either multiple arguments or an array of recipe names. You can use the <code>recipe[name]</code> syntax but you cannot use roles in a policy’s run list so this is generally redundant.</p>
+
           </td>
         </div>
         </tr>
@@ -136,7 +145,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-0.png);background-position: 0 -3456px" href="img/10.png" name="10"></a>
           </td>
           <td class="notes">
-            In addition to setting the primary run list, we can also set addition named run lists via `named_run_list`. These take the place of traditional override run lists (`chef-client -o`) while still allowing the policy to know about the potential override so that its cookbooks are included in the compiled snapshot.
+            <p>In addition to setting the primary run list, we can also set addition named run lists via <code>named_run_list</code>. These take the place of traditional override run lists (<code>chef-client -o</code>) while still allowing the policy to know about the potential override so that its cookbooks are included in the compiled snapshot.</p>
+
           </td>
         </div>
         </tr>
@@ -145,7 +155,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -0px" href="img/11.png" name="11"></a>
           </td>
           <td class="notes">
-            While the default_source lines specify the fallbacks for where to find cookbooks, it can also be overridden on a per-cookbook basis. This can also include version overrides like in an environment. Sources supported include path for things in the same repo or git/github to pull directly from a git branch or tag.
+            <p>While the default_source lines specify the fallbacks for where to find cookbooks, it can also be overridden on a per-cookbook basis. This can also include version overrides like in an environment. Sources supported include path for things in the same repo or git/github to pull directly from a git branch or tag.</p>
+
           </td>
         </div>
         </tr>
@@ -154,7 +165,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -384px" href="img/12.png" name="12"></a>
           </td>
           <td class="notes">
-            The most common default source is to use https://supermarket.chef.io/, but we can also pull in from a private Supermarket, an organization on a Chef Server, or monorepo-style folder of cookbooks.
+            <p>The most common default source is to use https://supermarket.chef.io/, but we can also pull in from a private Supermarket, an organization on a Chef Server, or monorepo-style folder of cookbooks.</p>
+
           </td>
         </div>
         </tr>
@@ -163,7 +175,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -768px" href="img/13.png" name="13"></a>
           </td>
           <td class="notes">
-            If you have a cookbook that is present in multiple default sources, you will have to resolve which source is preferred. This ensures there is never confusion about where a cookbook is coming from.
+            <p>If you have a cookbook that is present in multiple default sources, you will have to resolve which source is preferred. This ensures there is never confusion about where a cookbook is coming from.</p>
+
           </td>
         </div>
         </tr>
@@ -172,7 +185,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1152px" href="img/14.png" name="14"></a>
           </td>
           <td class="notes">
-            Policies can also include node attributes, like a role or environment. Unlike those, these are set using the syntax from cookbook attributes files, which makes setting complex nested values a little less verbose.
+            <p>Policies can also include node attributes, like a role or environment. Unlike those, these are set using the syntax from cookbook attributes files, which makes setting complex nested values a little less verbose.</p>
+
           </td>
         </div>
         </tr>
@@ -181,7 +195,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1536px" href="img/15.png" name="15"></a>
           </td>
           <td class="notes">
-            That covers the basic syntax and data for what goes in a Policyfile, now let's look at the main commands. As mentioned before, the first command you'll usually encounter is `chef install`. It takes an optional path to the file to process, but otherwise uses `./Policyfile.rb`. If the `Policyfile.lock` file doesn't exist, this command will run a version solver to generate a set of cookbooks that matches requirements from the policy and the various `depends` values in the cookbooks being used. This compiled policy snapshot is then written to disk for next time, and all the cookbooks used in it are downloaded to the local cache in a manner similar to Berkshelf or Bundler.
+            <p>That covers the basic syntax and data for what goes in a Policyfile, now let’s look at the main commands. As mentioned before, the first command you’ll usually encounter is <code>chef install</code>. It takes an optional path to the file to process, but otherwise uses <code>./Policyfile.rb</code>. If the <code>Policyfile.lock</code> file doesn’t exist, this command will run a version solver to generate a set of cookbooks that matches requirements from the policy and the various <code>depends</code> values in the cookbooks being used. This compiled policy snapshot is then written to disk for next time, and all the cookbooks used in it are downloaded to the local cache in a manner similar to Berkshelf or Bundler.</p>
+
           </td>
         </div>
         </tr>
@@ -190,7 +205,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -1920px" href="img/16.png" name="16"></a>
           </td>
           <td class="notes">
-            `chef update` is currently just a slight modification to the install command in that it forces a policy recompile even if there is an existing lockfile. At some point in the future support will be added for more fine-grained updates, but for now just use it when you want to re-solve a policy to pick up new or changed cookbooks.
+            <p><code>chef update</code> is currently just a slight modification to the install command in that it forces a policy recompile even if there is an existing lockfile. At some point in the future support will be added for more fine-grained updates, but for now just use it when you want to re-solve a policy to pick up new or changed cookbooks.</p>
+
           </td>
         </div>
         </tr>
@@ -199,7 +215,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -2304px" href="img/17.png" name="17"></a>
           </td>
           <td class="notes">
-            And finally we have `chef push`, which acts like `berks upload` in that it reads in a solved policy (lockfile) and uploads it to a Chef Server. Unlike `berks upload` this isn't a global operation, we push a compiled policy to a specific policy group. Policy groups aren't really first class objects per se, more just a kind of tag that creates segments within a single policy. Usually this is used to implement a separation between staging and production, or whatever other organizational segments you might have. The push command will also make sure any cookbooks needed for the policy get uploaded along with it.
+            <p>And finally we have <code>chef push</code>, which acts like <code>berks upload</code> in that it reads in a solved policy (lockfile) and uploads it to a Chef Server. Unlike <code>berks upload</code> this isn’t a global operation, we push a compiled policy to a specific policy group. Policy groups aren’t really first class objects per se, more just a kind of tag that creates segments within a single policy. Usually this is used to implement a separation between staging and production, or whatever other organizational segments you might have. The push command will also make sure any cookbooks needed for the policy get uploaded along with it.</p>
+
           </td>
         </div>
         </tr>
@@ -208,7 +225,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -2688px" href="img/18.png" name="18"></a>
           </td>
           <td class="notes">
-            By default all policy commands will look for a file named "Policyfile.rb" in the current directory. This makes sense for policies driven by a top-level role cookbook, but in a flatter, central-repository-driven we will usually want a folder with each policy as its own file. Each command will accept an optional argument to specify a path to the policy source. In a repo-centric structure we would generally put these under policies/ to match cookbooks/ and roles/.
+            <p>By default all policy commands will look for a file named “Policyfile.rb” in the current directory. This makes sense for policies driven by a top-level role cookbook, but in a flatter, central-repository-driven we will usually want a folder with each policy as its own file. Each command will accept an optional argument to specify a path to the policy source. In a repo-centric structure we would generally put these under policies/ to match cookbooks/ and roles/.</p>
+
           </td>
         </div>
         </tr>
@@ -217,7 +235,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -3072px" href="img/19.png" name="19"></a>
           </td>
           <td class="notes">
-            To pull everything together, a simple example of working with a policy. First we create the policy code and compile it (we'll just assume we got it right on the first try). Then we deploy the the policy out to stage 1, do something to verify that we are happy with the stage, and then roll it out to stage 2. Later on we have edited some cookbooks and want to pushed them out so we run chef update to recompile the policy, and then use chef push to update each group in sequence like before.
+            <p>To pull everything together, a simple example of working with a policy. First we create the policy code and compile it (we’ll just assume we got it right on the first try). Then we deploy the the policy out to stage 1, do something to verify that we are happy with the stage, and then roll it out to stage 2. Later on we have edited some cookbooks and want to pushed them out so we run chef update to recompile the policy, and then use chef push to update each group in sequence like before.</p>
+
           </td>
         </div>
         </tr>
@@ -226,7 +245,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-1.png);background-position: 0 -3456px" href="img/20.png" name="20"></a>
           </td>
           <td class="notes">
-            Unfortunately it isn't all roses and unicorns. The Policyfile system is evolving rapidly but there are some issues to know about.
+            <p>Unfortunately it isn’t all roses and unicorns. The Policyfile system is evolving rapidly but there are some issues to know about.</p>
+
           </td>
         </div>
         </tr>
@@ -235,7 +255,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -0px" href="img/21.png" name="21"></a>
           </td>
           <td class="notes">
-            The first issue is fact that all users in a policy-based system share a release pipeline for each specific policy.
+            <p>The first issue is fact that all users in a policy-based system share a release pipeline for each specific policy.</p>
+
           </td>
         </div>
         </tr>
@@ -244,7 +265,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -384px" href="img/22.png" name="22"></a>
           </td>
           <td class="notes">
-            So by way of an example, let's look at a case with two people trying to push an update to a cluster with three stages.
+            <p>So by way of an example, let’s look at a case with two people trying to push an update to a cluster with three stages.</p>
+
           </td>
         </div>
         </tr>
@@ -253,7 +275,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -768px" href="img/23.png" name="23"></a>
           </td>
           <td class="notes">
-            First the green user makes some changes, re-compiles their policy, and pushes the compiled policy to stage one.
+            <p>First the green user makes some changes, re-compiles their policy, and pushes the compiled policy to stage one.</p>
+
           </td>
         </div>
         </tr>
@@ -262,7 +285,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1152px" href="img/24.png" name="24"></a>
           </td>
           <td class="notes">
-            They do whatever verifications are needed (not pictured), and then proceed to push the compiled policy to stage two. Then let's say they get bored and go out to lunch.
+            <p>They do whatever verifications are needed (not pictured), and then proceed to push the compiled policy to stage two. Then let’s say they get bored and go out to lunch.</p>
+
           </td>
         </div>
         </tr>
@@ -271,7 +295,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1536px" href="img/25.png" name="25"></a>
           </td>
           <td class="notes">
-            The orange user gets back from lunch early, compiles their own modified policy, and rolls it out to all three stages (again, there would be some verification/burn in between stages but that isn't the point).
+            <p>The orange user gets back from lunch early, compiles their own modified policy, and rolls it out to all three stages (again, there would be some verification/burn in between stages but that isn’t the point).</p>
+
           </td>
         </div>
         </tr>
@@ -280,7 +305,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -1920px" href="img/26.png" name="26"></a>
           </td>
           <td class="notes">
-            Then the green user gets back and finishes their deploy. In the end we have an inconsistent cluster. Stages one and two are running the orange policy but stage three has the green policy.
+            <p>Then the green user gets back and finishes their deploy. In the end we have an inconsistent cluster. Stages one and two are running the orange policy but stage three has the green policy.</p>
+
           </td>
         </div>
         </tr>
@@ -289,7 +315,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -2304px" href="img/27.png" name="27"></a>
           </td>
           <td class="notes">
-            So in short, be aware of when a deploy is happening. If you are deploying on a cluster that you own, this is somewhat easier. If deploying on client clusters, double check with their team(s).
+            <p>So in short, be aware of when a deploy is happening. If you are deploying on a cluster that you own, this is somewhat easier. If deploying on client clusters, double check with their team(s).</p>
+
           </td>
         </div>
         </tr>
@@ -298,7 +325,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -2688px" href="img/28.png" name="28"></a>
           </td>
           <td class="notes">
-            A place this single pipeline issue comes into sharp focus is when dealing with a node that runs cookbooks managed by multiple teams. This may require more careful handling of who owns which pieces of the system, what the owner is responsible for, and how teams notify each other of changes.
+            <p>A place this single pipeline issue comes into sharp focus is when dealing with a node that runs cookbooks managed by multiple teams. This may require more careful handling of who owns which pieces of the system, what the owner is responsible for, and how teams notify each other of changes.</p>
+
           </td>
         </div>
         </tr>
@@ -307,7 +335,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3072px" href="img/29.png" name="29"></a>
           </td>
           <td class="notes">
-            The next major stumbling block is usually around environment-level attributes. Policy attributes map nicely to a replacement for role attributes, but as policy groups aren't a first-class object themselves there is no direct replacement for environment attributes. Fortunately there are a few patterns that can help.
+            <p>The next major stumbling block is usually around environment-level attributes. Policy attributes map nicely to a replacement for role attributes, but as policy groups aren’t a first-class object themselves there is no direct replacement for environment attributes. Fortunately there are a few patterns that can help.</p>
+
           </td>
         </div>
         </tr>
@@ -316,7 +345,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-2.png);background-position: 0 -3456px" href="img/30.png" name="30"></a>
           </td>
           <td class="notes">
-            The simplest is to use the group name as a top-level key in the attribute name for things you know will vary by group. You can access the name of the current node's policy group via `node.policy_group`. This is only workable in situations where you control how the attribute data is used though.
+            <p>The simplest is to use the group name as a top-level key in the attribute name for things you know will vary by group. You can access the name of the current node’s policy group via <code>node.policy_group</code>. This is only workable in situations where you control how the attribute data is used though.</p>
+
           </td>
         </div>
         </tr>
@@ -325,7 +355,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -0px" href="img/31.png" name="31"></a>
           </td>
           <td class="notes">
-            For situations where you need to use cookbooks not explicitly designed for this, you can use a hoisting pattern to copy the attribute data out of the group-specific subtree and overlay it on the rest of the attributes. This is often the most robust solution, but the code to implement can be tricky. A simple version is shown here, but stay tuned for a reusable cookbook that implements a more robust version.
+            <p>For situations where you need to use cookbooks not explicitly designed for this, you can use a hoisting pattern to copy the attribute data out of the group-specific subtree and overlay it on the rest of the attributes. This is often the most robust solution, but the code to implement can be tricky. A simple version is shown here, but stay tuned for a reusable cookbook that implements a more robust version.</p>
+
           </td>
         </div>
         </tr>
@@ -334,7 +365,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -384px" href="img/32.png" name="32"></a>
           </td>
           <td class="notes">
-            And finally you can skip policy attributes altogether and store environment-level values in a data bag item. This can help with situations where you want attribute data to live outside of the life cycle of the policy itself.
+            <p>And finally you can skip policy attributes altogether and store environment-level values in a data bag item. This can help with situations where you want attribute data to live outside of the life cycle of the policy itself.</p>
+
           </td>
         </div>
         </tr>
@@ -343,7 +375,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -768px" href="img/33.png" name="33"></a>
           </td>
           <td class="notes">
-            You can't use roles in the run lists of a Policyfile. The biggest case this impacts is having a "base" role applied to all nodes. You can support most of this use case using a shared base Policyfile that is included in all the others. This allows following same snapshot-based workflow while still having some shared data.
+            <p>You can’t use roles in the run lists of a Policyfile. The biggest case this impacts is having a “base” role applied to all nodes. You can support most of this use case using a shared base Policyfile that is included in all the others. This allows following same snapshot-based workflow while still having some shared data.</p>
+
           </td>
         </div>
         </tr>
@@ -352,7 +385,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1152px" href="img/34.png" name="34"></a>
           </td>
           <td class="notes">
-            A downside compared to a Berkshelf-based workflow is that single cookbooks can't be upgraded without fully re-compiling the policy. Support is planned for the future, but for now take care to diff your compiled policy before pushing to ensure you aren't releasing something unexpected.
+            <p>A downside compared to a Berkshelf-based workflow is that single cookbooks can’t be upgraded without fully re-compiling the policy. Support is planned for the future, but for now take care to diff your compiled policy before pushing to ensure you aren’t releasing something unexpected.</p>
+
           </td>
         </div>
         </tr>
@@ -361,7 +395,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1536px" href="img/35.png" name="35"></a>
           </td>
           <td class="notes">
-            ChefDK in general and the Policyfile tools in specific are evolving rapidly. Not everything out there has support for the new workflows but it will probably be added soon. If you run into an unsupported corner of the ecosystem, you can always ask me.
+            <p>ChefDK in general and the Policyfile tools in specific are evolving rapidly. Not everything out there has support for the new workflows but it will probably be added soon. If you run into an unsupported corner of the ecosystem, you can always ask me.</p>
+
           </td>
         </div>
         </tr>
@@ -370,7 +405,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -1920px" href="img/36.png" name="36"></a>
           </td>
           <td class="notes">
-            So to summarize, some of the major things to look out for are pipeline stomping, data management, and possibly wonky integrations.
+            <p>So to summarize, some of the major things to look out for are pipeline stomping, data management, and possibly wonky integrations.</p>
+
           </td>
         </div>
         </tr>
@@ -380,6 +416,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -388,7 +425,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -2688px" href="img/38.png" name="38"></a>
           </td>
           <td class="notes">
-            A quick version of a traditional Chef cookbook release process. First we updated the cookbook version in metadata.rb, and make sure to follow SemVer. Then we make a git tag, maybe use Stove to push to a Supermarket site, and `berks upload` to push it to a Chef Server. Then we edit the Chef environment for each stage to roll the new version out, making sure chef-client completes successfully on each stage. Importantly this process is cookbook-centric, so we release each cookbook independently.
+            <p>A quick version of a traditional Chef cookbook release process. First we updated the cookbook version in metadata.rb, and make sure to follow SemVer. Then we make a git tag, maybe use Stove to push to a Supermarket site, and <code>berks upload</code> to push it to a Chef Server. Then we edit the Chef environment for each stage to roll the new version out, making sure chef-client completes successfully on each stage. Importantly this process is cookbook-centric, so we release each cookbook independently.</p>
+
           </td>
         </div>
         </tr>
@@ -397,7 +435,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -3072px" href="img/39.png" name="39"></a>
           </td>
           <td class="notes">
-            Usually a release process like this is coupled with SemVer so that we can use that semantic information to structure how new releases flow out to different environments and users. It allows using the pessimistic range operator in environments and dependencies, leaving the version solver in Chef Server and Berkshelf to work out the details.
+            <p>Usually a release process like this is coupled with SemVer so that we can use that semantic information to structure how new releases flow out to different environments and users. It allows using the pessimistic range operator in environments and dependencies, leaving the version solver in Chef Server and Berkshelf to work out the details.</p>
+
           </td>
         </div>
         </tr>
@@ -406,7 +445,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-3.png);background-position: 0 -3456px" href="img/40.png" name="40"></a>
           </td>
           <td class="notes">
-            But it isn't all positive. Tracking which changes are compatible with which other changes presents some cognitive load during development. Additionally when running a release process you often need to release multiple cookbooks in the right order. On top of that, Chef's version solver is very limited and only supports three component x.y.z version numbers, no extra tags like -pre or -rc1. This makes it difficult to handle releases when different environments are targeting different git branches of the same cookbook.
+            <p>But it isn’t all positive. Tracking which changes are compatible with which other changes presents some cognitive load during development. Additionally when running a release process you often need to release multiple cookbooks in the right order. On top of that, Chef’s version solver is very limited and only supports three component x.y.z version numbers, no extra tags like -pre or -rc1. This makes it difficult to handle releases when different environments are targeting different git branches of the same cookbook.</p>
+
           </td>
         </div>
         </tr>
@@ -415,7 +455,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -0px" href="img/41.png" name="41"></a>
           </td>
           <td class="notes">
-            That's a lot of work.
+            <p>That’s a lot of work.</p>
+
           </td>
         </div>
         </tr>
@@ -424,7 +465,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -384px" href="img/42.png" name="42"></a>
           </td>
           <td class="notes">
-            So we want a lighter weight solution. Enter YoloVer: a workflow based around snapshots of a whole run list instead of multiple discrete projects with their own release processes. As you might imagine, this workflow is based around Policyfiles. Using all the tools we just learned, we can manage cookbook deployments with a granularity of whole-repository snapshots. This means we don't need the overhead of a per-cookbook release system but still retain control over rollouts.
+            <p>So we want a lighter weight solution. Enter YoloVer: a workflow based around snapshots of a whole run list instead of multiple discrete projects with their own release processes. As you might imagine, this workflow is based around Policyfiles. Using all the tools we just learned, we can manage cookbook deployments with a granularity of whole-repository snapshots. This means we don’t need the overhead of a per-cookbook release system but still retain control over rollouts.</p>
+
           </td>
         </div>
         </tr>
@@ -433,7 +475,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -768px" href="img/43.png" name="43"></a>
           </td>
           <td class="notes">
-            So let's look at an example git repository for a hypothetical monitoring team. We have a folder of local cookbooks specific to the team, and a folder of policies for each type of server we are going to maintain.
+            <p>So let’s look at an example git repository for a hypothetical monitoring team. We have a folder of local cookbooks specific to the team, and a folder of policies for each type of server we are going to maintain.</p>
+
           </td>
         </div>
         </tr>
@@ -442,7 +485,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1152px" href="img/44.png" name="44"></a>
           </td>
           <td class="notes">
-            For the "db" policy we have all the things we saw before. We set the name, as always. Then we set two default sources. Remember these have to be non-overlapping, but it means everything in the cookbooks/ folder will be picked up automatically when needed. We also set one cookbook as coming from a specific git repository. When we take the snapshot, we'll capture whatever is in the master branch of that repository and use it until we recompile. Finally we set our run list, using cookbooks from all three sources.
+            <p>For the “db” policy we have all the things we saw before. We set the name, as always. Then we set two default sources. Remember these have to be non-overlapping, but it means everything in the cookbooks/ folder will be picked up automatically when needed. We also set one cookbook as coming from a specific git repository. When we take the snapshot, we’ll capture whatever is in the master branch of that repository and use it until we recompile. Finally we set our run list, using cookbooks from all three sources.</p>
+
           </td>
         </div>
         </tr>
@@ -452,6 +496,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -460,7 +505,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1920px" href="img/46.png" name="46"></a>
           </td>
           <td class="notes">
-            Having a production workflow is all well and good, but development starts on a workstation somewhere and generally we want to try things locally first.
+            <p>Having a production workflow is all well and good, but development starts on a workstation somewhere and generally we want to try things locally first.</p>
+
           </td>
         </div>
         </tr>
@@ -470,6 +516,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -478,7 +525,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -2688px" href="img/48.png" name="48"></a>
           </td>
           <td class="notes">
-            Let's start with a basic Test Kitchen config. The is named .kitchen.yml and it goes in the base of the repository (remember, this isn't for testing single cookbooks, we'll cover that later). The overall structure of Test Kitchen is a driver configuration which determines how we'll create VMs, a list of platforms to test on, and then a list of test suites.
+            <p>Let’s start with a basic Test Kitchen config. The is named .kitchen.yml and it goes in the base of the repository (remember, this isn’t for testing single cookbooks, we’ll cover that later). The overall structure of Test Kitchen is a driver configuration which determines how we’ll create VMs, a list of platforms to test on, and then a list of test suites.</p>
+
           </td>
         </div>
         </tr>
@@ -487,7 +535,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3072px" href="img/49.png" name="49"></a>
           </td>
           <td class="notes">
-            One of the core concepts of Test Kitchen is the instance matrix. An instance is the combination of a platform and a suite, using the names of each to form the name of the instance.
+            <p>One of the core concepts of Test Kitchen is the instance matrix. An instance is the combination of a platform and a suite, using the names of each to form the name of the instance.</p>
+
           </td>
         </div>
         </tr>
@@ -497,6 +546,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -506,6 +556,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -515,6 +566,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -524,6 +576,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -532,7 +585,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1152px" href="img/54.png" name="54"></a>
           </td>
           <td class="notes">
-            Putting it all together we get this Test Kitchen config. We haven't set up any actual tests yet, but this will let us run the policy in a VM and see if it converges cleanly.
+            <p>Putting it all together we get this Test Kitchen config. We haven’t set up any actual tests yet, but this will let us run the policy in a VM and see if it converges cleanly.</p>
+
           </td>
         </div>
         </tr>
@@ -541,7 +595,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1536px" href="img/55.png" name="55"></a>
           </td>
           <td class="notes">
-            Switching to Policyfiles usually means rewriting some amount of roles, environments, and the cookbook equivalents of each to the Policyfile structure. Let's examine each of those.
+            <p>Switching to Policyfiles usually means rewriting some amount of roles, environments, and the cookbook equivalents of each to the Policyfile structure. Let’s examine each of those.</p>
+
           </td>
         </div>
         </tr>
@@ -550,7 +605,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -1920px" href="img/56.png" name="56"></a>
           </td>
           <td class="notes">
-            A pretty simple role for deploying some kind of application. We're pulling in some kind of base recipe, an application recipe, and set a node attribute for the application's port.
+            <p>A pretty simple role for deploying some kind of application. We’re pulling in some kind of base recipe, an application recipe, and set a node attribute for the application’s port.</p>
+
           </td>
         </div>
         </tr>
@@ -559,7 +615,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2304px" href="img/57.png" name="57"></a>
           </td>
           <td class="notes">
-            Or to look at it in the form of a role cookbook. The same effective role just in cookbook metadata, attributes, and recipes. You can see the same role data, the recipes are pulled in via include_recipe and the application port is set in the attributes file.
+            <p>Or to look at it in the form of a role cookbook. The same effective role just in cookbook metadata, attributes, and recipes. You can see the same role data, the recipes are pulled in via include_recipe and the application port is set in the attributes file.</p>
+
           </td>
         </div>
         </tr>
@@ -568,7 +625,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -2688px" href="img/58.png" name="58"></a>
           </td>
           <td class="notes">
-            Converting this to a Policyfile is fairly straightforward. We have the same run list as with the other forms, and notably the attributes are exactly the same as in the role cookbook making the conversion even easier.
+            <p>Converting this to a Policyfile is fairly straightforward. We have the same run list as with the other forms, and notably the attributes are exactly the same as in the role cookbook making the conversion even easier.</p>
+
           </td>
         </div>
         </tr>
@@ -577,7 +635,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3072px" href="img/59.png" name="59"></a>
           </td>
           <td class="notes">
-            Moving on to an environment; here we have a version constraint to lock the postgresql cookbook and an attribute to set Postgres' data directory.
+            <p>Moving on to an environment; here we have a version constraint to lock the postgresql cookbook and an attribute to set Postgres’ data directory.</p>
+
           </td>
         </div>
         </tr>
@@ -586,7 +645,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -3456px" href="img/60.png" name="60"></a>
           </td>
           <td class="notes">
-            Converting this to a cookbook is a bit less clear. This is following my specific version of the environment cookbook pattern, but yours may look slightly different. We pull in all our role cookbooks, in addition to the version constraint on the postgresql cookbook. Our environment attributes become cookbook attributes, and each role maps to a single recipe.
+            <p>Converting this to a cookbook is a bit less clear. This is following my specific version of the environment cookbook pattern, but yours may look slightly different. We pull in all our role cookbooks, in addition to the version constraint on the postgresql cookbook. Our environment attributes become cookbook attributes, and each role maps to a single recipe.</p>
+
           </td>
         </div>
         </tr>
@@ -595,7 +655,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -0px" href="img/61.png" name="61"></a>
           </td>
           <td class="notes">
-            Converting to a Policyfile is similarly dicey. Environments map to policy groups, but this means that it can be difficult to include cross-policy constraints. This is the most direct conversion, starting from the role policy but adding the cookbook constraint and attribute. This works as a kind-of one off but will only apply to the one "role" and we would have to update the policy as we move things through the pipeline if we want different versions of postgresql in different policy groups.
+            <p>Converting to a Policyfile is similarly dicey. Environments map to policy groups, but this means that it can be difficult to include cross-policy constraints. This is the most direct conversion, starting from the role policy but adding the cookbook constraint and attribute. This works as a kind-of one off but will only apply to the one “role” and we would have to update the policy as we move things through the pipeline if we want different versions of postgresql in different policy groups.</p>
+
           </td>
         </div>
         </tr>
@@ -604,7 +665,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -384px" href="img/62.png" name="62"></a>
           </td>
           <td class="notes">
-            A more useful translation is often to use a snippet of Policyfile code that can be shared between the multiple policies. This handles some of the possible use cases, but remember to mesh this on top of the single release pipeline structure.
+            <p>A more useful translation is often to use a snippet of Policyfile code that can be shared between the multiple policies. This handles some of the possible use cases, but remember to mesh this on top of the single release pipeline structure.</p>
+
           </td>
         </div>
         </tr>
@@ -613,7 +675,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -768px" href="img/63.png" name="63"></a>
           </td>
           <td class="notes">
-            Another option for long-term version restrictions on community cookbooks is to put a stubby wrapper in the policy repo's cookbooks.
+            <p>Another option for long-term version restrictions on community cookbooks is to put a stubby wrapper in the policy repo’s cookbooks.</p>
+
           </td>
         </div>
         </tr>
@@ -623,6 +686,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -631,7 +695,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1536px" href="img/65.png" name="65"></a>
           </td>
           <td class="notes">
-            Discuss the chef push command and how to use it.
+            <p>Discuss the chef push command and how to use it.</p>
+
           </td>
         </div>
         </tr>
@@ -640,7 +705,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -1920px" href="img/66.png" name="66"></a>
           </td>
           <td class="notes">
-            Jenkins, CI, maybe ChefSpec and InSpec?
+            <p>Jenkins, CI, maybe ChefSpec and InSpec?</p>
+
           </td>
         </div>
         </tr>
@@ -649,7 +715,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2304px" href="img/67.png" name="67"></a>
           </td>
           <td class="notes">
-            There are four major branches of testing (unit, integration, acceptance, and smoke) but only unit and integration tests generally happen in the context of local testing. With Chef that means ChefSpec and Test Kitchen. We'll see more of InSpec later when we start writing integration tests, but for now just know it is related to Test Kitchen.
+            <p>There are four major branches of testing (unit, integration, acceptance, and smoke) but only unit and integration tests generally happen in the context of local testing. With Chef that means ChefSpec and Test Kitchen. We’ll see more of InSpec later when we start writing integration tests, but for now just know it is related to Test Kitchen.</p>
+
           </td>
         </div>
         </tr>
@@ -658,7 +725,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -2688px" href="img/68.png" name="68"></a>
           </td>
           <td class="notes">
-            Before we go over the details of how to use those tools, let's look at the theory behind the types of testing. Unit tests mean testing a single unit of code. With things like web applications a unit is usually a single class or method, but for Chef our units are more often a single recipe or a custom resource. The goal of unit testing is get high-speed tests above almost anything else. This means we focus on mocking out anything outside of the unit especially anything slow or with side effects.
+            <p>Before we go over the details of how to use those tools, let’s look at the theory behind the types of testing. Unit tests mean testing a single unit of code. With things like web applications a unit is usually a single class or method, but for Chef our units are more often a single recipe or a custom resource. The goal of unit testing is get high-speed tests above almost anything else. This means we focus on mocking out anything outside of the unit especially anything slow or with side effects.</p>
+
           </td>
         </div>
         </tr>
@@ -667,7 +735,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -3072px" href="img/69.png" name="69"></a>
           </td>
           <td class="notes">
-            This makes unit tests a great choice for testing edge cases, complex inputs, and regression checks. Because unit tests are generally much faster than integration tests, we can have far more of them without our tests taking a frustrating amount of time.
+            <p>This makes unit tests a great choice for testing edge cases, complex inputs, and regression checks. Because unit tests are generally much faster than integration tests, we can have far more of them without our tests taking a frustrating amount of time.</p>
+
           </td>
         </div>
         </tr>
@@ -676,7 +745,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-6.png);background-position: 0 -3456px" href="img/70.png" name="70"></a>
           </td>
           <td class="notes">
-            Integration tests are the other side of the coin. We throw all the units in a big pile and light it on fire to see what happens. This means tests take a lot longer since we let them do the whole side-effects thing, and rely on higher-level isolation for repeatability.
+            <p>Integration tests are the other side of the coin. We throw all the units in a big pile and light it on fire to see what happens. This means tests take a lot longer since we let them do the whole side-effects thing, and rely on higher-level isolation for repeatability.</p>
+
           </td>
         </div>
         </tr>
@@ -685,7 +755,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -0px" href="img/71.png" name="71"></a>
           </td>
           <td class="notes">
-            So this means generally we use integration tests to look at bigger slices of real-world use cases. Sometimes they can also be used for performance analysis, but beware of how much the test environment impacts the numbers, you probably can't compare directly to production.
+            <p>So this means generally we use integration tests to look at bigger slices of real-world use cases. Sometimes they can also be used for performance analysis, but beware of how much the test environment impacts the numbers, you probably can’t compare directly to production.</p>
+
           </td>
         </div>
         </tr>
@@ -694,7 +765,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -384px" href="img/72.png" name="72"></a>
           </td>
           <td class="notes">
-            ChefSpec is the primary unit testing tool for Chef. It is a set of RSpec helpers and extensions for running a Chef converge without actually modifying the system. By default all providers are stubbed to be a no-op, but you can re-enable specific ones for testing.
+            <p>ChefSpec is the primary unit testing tool for Chef. It is a set of RSpec helpers and extensions for running a Chef converge without actually modifying the system. By default all providers are stubbed to be a no-op, but you can re-enable specific ones for testing.</p>
+
           </td>
         </div>
         </tr>
@@ -703,7 +775,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -768px" href="img/73.png" name="73"></a>
           </td>
           <td class="notes">
-            Test Kitchen is a suite of tools to create a blank VM using any of a number of drivers (Vagrant, AWS, OpenStack, Docker), install Chef and copy our cookbook(s) to the VM, run a normal Chef converge, and then run some tests to confirm the cookbook did what we think it was supposed to.
+            <p>Test Kitchen is a suite of tools to create a blank VM using any of a number of drivers (Vagrant, AWS, OpenStack, Docker), install Chef and copy our cookbook(s) to the VM, run a normal Chef converge, and then run some tests to confirm the cookbook did what we think it was supposed to.</p>
+
           </td>
         </div>
         </tr>
@@ -712,7 +785,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -1152px" href="img/74.png" name="74"></a>
           </td>
           <td class="notes">
-            Before we dive into the specifics of ChefSpec, let's talk about writing RSpec tests in general. ChefSpec builds on top of RSpec so you need to walk before you can run (or converge, ::cymbal crash::).
+            <p>Before we dive into the specifics of ChefSpec, let’s talk about writing RSpec tests in general. ChefSpec builds on top of RSpec so you need to walk before you can run (or converge, ::cymbal crash::).</p>
+
           </td>
         </div>
         </tr>
@@ -721,7 +795,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-7.png);background-position: 0 -1536px" href="img/75.png" name="75"></a>
           </td>
           <td class="notes">
-            The simplest possible RSpec test. We have one example group, created using "describe" and labeled "a thing". Inside that is one example ("it") labeled "is a thing". Group and example labels can be anything, and we'll cover them in more detail in a moment, but overall the standard is to make the RSpec code read like prose. Inside the example we have one expectation ("expect()"), in this case just comparing 1==1.
+            <p>The simplest possible RSpec test. We have one example group, created using “describe” and labeled “a thing”. Inside that is one example (“it”) labeled “is a thing”. Group and example labels can be anything, and we’ll cover them in more detail in a moment, but overall the standard is to make the RSpec code read like prose. Inside the example we have one expectation (“expect()”), in this case just comparing 1==1.</p>
+
           </td>
         </div>
         </tr>
@@ -731,6 +806,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -740,6 +816,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -749,6 +826,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -758,6 +836,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -767,6 +846,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -776,6 +856,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -785,6 +866,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -794,6 +876,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -803,6 +886,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -812,6 +896,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -821,6 +906,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -830,6 +916,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -839,6 +926,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -848,6 +936,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -857,6 +946,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -866,6 +956,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -875,6 +966,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -884,6 +976,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -893,6 +986,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -902,6 +996,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -911,6 +1006,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -920,6 +1016,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -929,6 +1026,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -938,6 +1036,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -947,6 +1046,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -956,6 +1056,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -965,6 +1066,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -974,6 +1076,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -983,6 +1086,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -992,6 +1096,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1001,6 +1106,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1010,6 +1116,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1019,6 +1126,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1028,6 +1136,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1037,6 +1146,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1046,6 +1156,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1055,6 +1166,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1064,6 +1176,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1073,6 +1186,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1082,6 +1196,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
@@ -1090,7 +1205,8 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-11.png);background-position: 0 -1920px" href="img/116.png" name="116"></a>
           </td>
           <td class="notes">
-            How this workflow operates with a team.
+            <p>How this workflow operates with a team.</p>
+
           </td>
         </div>
         </tr>
@@ -1100,6 +1216,7 @@ table{border-collapse:collapse;border-spacing:0}
           </td>
           <td class="notes">
             
+
           </td>
         </div>
         </tr>
