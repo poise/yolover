@@ -20,7 +20,7 @@ require 'json'
 require 'erubis'
 require 'mixlib/shellout'
 require 'oily_png'
-
+require 'kramdown'
 
 
 INPUT_FILE = '/Users/coderanger/Library/Mobile Documents/com~apple~Keynote/Documents/yolover.key'

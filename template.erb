@@ -56,7 +56,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-<%= slide['sprite']['sheet'] %>.png);background-position: 0 -<%= slide['sprite']['offset'] %>px" href="img/<%= slide['number'] %>.png" name="<%= slide['number'] %>"></a>
           </td>
           <td class="notes">
-            <%= slide['notes'] %>
+            <%= Kramdown::Document.new(slide['notes'].gsub(/^\[.*\]$/, '').strip, input: 'GFM').to_html %>
           </td>
         </div>
         </tr>

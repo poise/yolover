@@ -21,6 +21,7 @@ gem 'mixlib-shellout'
 gem 'chunky_png'
 gem 'oily_png'
 gem 'erubis'
+gem 'kramdown'
 
 # For debugging.
 gem 'pry'
