@@ -88,6 +88,8 @@ task 'html:index' do
   slides.each do |slide|
     slide['sprite'] = sprites[slide['number']-1]
   end
+  # Drop everything after the end marker.
+  slides = slides.take_while {|slide| !slide['notes'].include?('END MARKER') }
   # Render the HTML.
   rendered = tpl.result(slides: slides)
   IO.write(File.join(ROOT, 'index.html'), rendered)
