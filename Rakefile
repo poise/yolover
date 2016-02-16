@@ -77,7 +77,7 @@ task 'sprites' => %w{extract} do
   IO.write(File.join(ROOT, 'build', 'sprites.json'), sprite_data.to_json)
 end
 
-task 'html:index' do
+task 'html:only' do
   # Load source data.
   tpl = Erubis::Eruby.new(IO.read(File.join(ROOT, 'template.erb')))
   slides = JSON.parse(IO.read(File.join(ROOT, 'build', 'extract.json')))
@@ -95,9 +95,9 @@ task 'html:index' do
   IO.write(File.join(ROOT, 'index.html'), rendered)
 end
 
-task 'html' => %w{extract sprites html:index}
+task 'html' => %w{extract sprites html:only}
 
-task 'push' => %w{html images} do
+task 'push:only' do
   sh('git checkout master')
   sh('git add *.pdf img/*.png index.html')
   sh('git commit -m "Content update."')
@@ -107,3 +107,5 @@ task 'push' => %w{html images} do
   sh('git push origin master')
   sh('git push origin gh-pages')
 end
+
+task 'push' => %w{html images push:only}
