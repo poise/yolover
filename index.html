@@ -46,7 +46,7 @@ table{border-collapse:collapse;border-spacing:0}
       <div class="preamble">
         <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
         <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
-        <p>This version compiled on 2016-02-16 12:57:18 -0800</p>
+        <p>This version compiled on 2016-02-16 15:16:20 -0800</p>
       </div>
       <hr />
       <table>
@@ -505,7 +505,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1920px" href="img/46.png" name="46"></a>
           </td>
           <td class="notes">
-            
+            <p>For running our policy locally we’re going to use Test Kitchen with the <code>policyfile_zero</code> provisioner. While this can be used for testing individual cookbooks, in this case what we care about is repository-level policies. If you aren’t already using ChefDK on your workstation (and you probably should be), make sure you install the <code>chef-dk</code> gem.</p>
 
           </td>
         </div>
@@ -515,7 +515,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -2304px" href="img/47.png" name="47"></a>
           </td>
           <td class="notes">
-            <p>Let’s start with a basic Test Kitchen config. The is named .kitchen.yml and it goes in the base of the repository (remember, this isn’t for testing single cookbooks, we’ll cover that later). The overall structure of Test Kitchen is a driver configuration which determines how we’ll create VMs, a list of platforms to test on, and then a list of test suites.</p>
+            <p>Let’s start with a basic Test Kitchen config. The is named <code>.kitchen.yml</code> and it goes in the base of the repository (remember, this isn’t for testing single cookbooks, we’ll cover that later). The overall structure of Test Kitchen is a driver configuration which determines how we’ll create VMs, a list of platforms to test on, and then a list of test suites.</p>
 
           </td>
         </div>
@@ -525,7 +525,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -2688px" href="img/48.png" name="48"></a>
           </td>
           <td class="notes">
-            <p>One of the core concepts of Test Kitchen is the instance matrix. An instance is the combination of a platform and a suite, using the names of each to form the name of the instance.</p>
+            <p>One of the core concepts of Test Kitchen is the instance matrix. An instance is the combination of a platform and a suite, using the names of each to form the name of the instance. Notably periods in the platform (or suite) name get removed, so be aware of that.</p>
 
           </td>
         </div>
@@ -535,7 +535,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3072px" href="img/49.png" name="49"></a>
           </td>
           <td class="notes">
-            
+            <p>To makeTest Kitchen understand policies internally we need to configure the <code>policyfile_zero</code> provisioner plugin. Add a new section to the <code>.kitchen.yml</code> with this content, setting the name of the plugin to use and the path to the Policyfile to test.</p>
 
           </td>
         </div>
@@ -545,7 +545,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3456px" href="img/50.png" name="50"></a>
           </td>
           <td class="notes">
-            
+            <p>For testing named run lists, we can add a per-suite configuration value. Make sure to nest the <code>provisioner_config:</code> key at the same level as <code>name:</code>, YAML is very sensitive to whitespace.</p>
 
           </td>
         </div>
@@ -555,7 +555,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -0px" href="img/51.png" name="51"></a>
           </td>
           <td class="notes">
-            
+            <p>Similarly we can use multiple suites to test different policies. This can be combined with the <code>named_run_list</code> configuration key to build a list of suites for all the possible run lists in all the policies.</p>
 
           </td>
         </div>
@@ -565,7 +565,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-5.png);background-position: 0 -384px" href="img/52.png" name="52"></a>
           </td>
           <td class="notes">
-            
+            <p>With our trusty <code>.kitchen.yml</code> configuration in place, we can move on to the basics of using Test Kitchen. In this case we aren’t actually writing any tests, so the two commands we need to worry about are <code>kitchen converge</code> and <code>kitchen destroy</code>. The <code>converge</code> command creates a new virtual machine using Vagrant (or one of the other drivers if set that up), installs Chef, and runs the requested policy. <code>kitchen converge</code> on its own will converge all instances (suite plus platform pairs) but it can take an optional regular expression to filter down to specific instances. When we are done working, use <code>kitchen destroy</code> to clean up all the virtual machines.</p>
 
           </td>
         </div>
