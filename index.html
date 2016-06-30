@@ -47,7 +47,7 @@ table{border-collapse:collapse;border-spacing:0}
         <p>WARNING: This guide is a work in progress. Check back often for new updates.</p>
         <p>An example repository for this workflow is <a href="https://github.com/poise/yolover-example">available on GitHub</a>.</p>
         <p>These slides are also available as a PDF: <a href="yolover_notes.pdf">with notes</a> or <a href="yolover.pdf">without notes</a>.
-        <p>This version compiled on 2016-04-19 16:31:36 -0700</p>
+        <p>This version compiled on 2016-06-29 19:22:52 -0700</p>
       </div>
       <hr />
       <table>
@@ -506,7 +506,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -1920px" href="img/46.png" name="46"></a>
           </td>
           <td class="notes">
-            <p>For running our policy locally we’re going to use Test Kitchen with the <code>policyfile_zero</code> provisioner. While this can be used for testing individual cookbooks, in this case what we care about is repository-level policies. If you aren’t already using ChefDK on your workstation (and you probably should be), make sure you install the <code>chef-dk</code> gem.</p>
+            <p>For running our policy locally we’re going to use Test Kitchen with the <code>chef_zero</code> provisioner. While this can be used for testing individual cookbooks, in this case what we care about is repository-level policies. If you aren’t already using ChefDK on your workstation (and you probably should be), make sure you install the <code>chef-dk</code> gem.</p>
 
           </td>
         </div>
@@ -536,7 +536,7 @@ table{border-collapse:collapse;border-spacing:0}
             <a class="thumbnail" style="background-image: url(img/sprite-4.png);background-position: 0 -3072px" href="img/49.png" name="49"></a>
           </td>
           <td class="notes">
-            <p>To makeTest Kitchen understand policies internally we need to configure the <code>policyfile_zero</code> provisioner plugin. Add a new section to the <code>.kitchen.yml</code> with this content, setting the name of the plugin to use and the path to the Policyfile to test.</p>
+            <p>To makeTest Kitchen understand policies internally we need to configure the <code>chef_zero</code> provisioner plugin. Add a new section to the <code>.kitchen.yml</code> with this content, setting the name of the plugin to use and the path to the Policyfile to test.</p>
 
           </td>
         </div>
